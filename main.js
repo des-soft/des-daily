@@ -21,10 +21,10 @@ function createWindow(){
     })
 
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        // pathname: 'localhost:4444',
-        protocol: 'file:',
-        // protocol: 'http', 
+        // pathname: path.join(__dirname, 'index.html'),
+        pathname: 'localhost:8081',
+        // protocol: 'file:',
+        protocol: 'http', 
         slashes: true
     })); 
 

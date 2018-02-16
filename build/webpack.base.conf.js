@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const { pages_entry } = require('./pages')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -12,10 +13,12 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    calendar: './src/Calendar/main.js',
-    editor: './src/Editor/main.js'
-  },
+  // entry: {
+  //   calendar: './src/Calendar/main.js',
+  //   editor: './src/Editor/main.js'
+  // },
+  // 自动生成 
+  entry: pages_entry, 
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

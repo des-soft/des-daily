@@ -47,7 +47,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "electron":"electron ."
+    "electron": "electron ."
   },
   "engines": {
     "node": ">= 6.0.0",

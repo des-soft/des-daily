@@ -22,7 +22,7 @@ function createWindow(){
 
     mainWindow.loadURL(url.format({
         // pathname: path.join(__dirname, 'index.html'),
-        pathname: 'localhost:8081',
+        pathname: 'localhost:8080/editor.html',
         // protocol: 'file:',
         protocol: 'http', 
         slashes: true

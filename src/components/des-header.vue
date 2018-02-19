@@ -65,9 +65,7 @@ export default {
             this.first.screenY = e.screenY; 
         }, 
         close(e){
-            
-
-            // win.close(); 
+            win.close(); 
         },
         leave(e){
             this.isDown = false; 

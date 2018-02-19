@@ -1,13 +1,28 @@
+/**
+ * gitter 工具 
+ * 比如这样使用： 
+ * 
+ * gitter.saveAll('喵啦').then ... 
+ * 相当于
+ * git add ./* && git commit -m "喵啦" && git push origin master 
+ * 
+ * 利用了 simple-git 来构造
+ */
 const configer = require('./configer');
 const daily_dir = require('./daily_dir'); 
 const path = require('path'); 
 const git = require('simple-git'); 
 const git_base = path.join(daily_dir, 'git_base'); 
+
+// mkdir 
 const mkdir = require('../utils/mkdir'); 
-const rimraf = require('rimraf-then')
+
+// rm -rf 
+const rimraf = require('rimraf-then'); 
 
 mkdir(git_base);
 
+// 让 simple-git cd 到 git_base 
 const git_shell = git(git_base); 
 let gitter = {}; 
 

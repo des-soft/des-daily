@@ -7,5 +7,6 @@ const osHomedir = require('os-homedir')
 // mkdir /home/wang/.des-daily 
 mkdir(DAILY_DIR); 
 
+// just like `/home/wang/.des-daily`
 module.exports = DAILY_DIR; 
 

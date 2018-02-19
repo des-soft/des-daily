@@ -24,7 +24,8 @@ configer.init = () => {
         let raw_data = fs.readFileSync(config_file).toString(); 
         configer.data = JSON.parse(raw_data); 
     } catch(err) {
-        // 说明不存在，应该生成 
+        // 说明 config_file 不存在或者内容不合法
+        // 读取失败，应该自动生成 
         console.log(`配置文件加载失败，${config_file}`); 
         console.log(`自动生成空配置文件`); 
 

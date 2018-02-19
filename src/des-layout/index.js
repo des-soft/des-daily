@@ -13,6 +13,7 @@
 import LineBlock from './LineBlock'; 
 import Vue from 'vue'; 
 import DesResizer from './inner-component/des-resizer'; 
+import Boot from './Boot.vue'; 
 
 let D = {}
 
@@ -25,6 +26,8 @@ D.install = function(Vue, option){
     Vue.prototype.$D = D; 
     Vue.component('d-line-block', LineBlock); 
     Vue.component('d-resizer', DesResizer); 
+
+    Vue.prototype.$d_bus = new Vue(); 
 }
 
 /**
@@ -33,17 +36,12 @@ D.install = function(Vue, option){
  */
 D.$attach = function(el, line_block_table){
     
-    let ins = new Vue({
-        el,
-        data: {
-            line_block_table
-        }, 
-        template: `
-            <div>
-                <d-line-block :blocks="line_block_table"></d-line-block>
-            </div>
-        `
+    Boot.data = Object.assign(Boot.data, {
+        line_block_table
     });
+    Boot.el = el; 
+
+    let ins = new Vue(Boot);
 
     window.ins = ins; 
 

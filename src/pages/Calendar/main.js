@@ -12,30 +12,17 @@ D.$attach('#app', [
     {
         component: DesHeader,
         style: {
-            height: '60px',
+            height: '36px',
             width: '100%'
         }
     }, 
     // 第二行 
     [ // 第二行的内部 
         {
-            component: {
-                template: `
-                    <div>占位</div>
-                `
-            }, 
-            style: {
-                'vertical-align': 'top', 
-                'width': '100px',
-                // resize: 'horizontal',
-                // overflow: 'auto'
-            }
-        },
-        {
             component: DesAside, 
             style: {
                 'vertical-align': 'top', 
-                'width': '100px',
+                'width': '196px',
                 // resize: 'horizontal',
                 // overflow: 'auto'
             }
@@ -43,7 +30,7 @@ D.$attach('#app', [
         {
             component: 'd-resizer',
             style: {
-                height: '500px'
+                height: '764px'
             }
         },
         // Editor 
@@ -51,22 +38,10 @@ D.$attach('#app', [
             component: DesEditor, 
             style: {
                 'vertical-align': 'top', 
-                width: '500px'
+                width: '1000px', 
+                height: '764px'
             }
-        },
-        {
-            component: {
-                template: `
-                    <div>占位</div>
-                `
-            }, 
-            style: {
-                'vertical-align': 'top', 
-                'width': '100px',
-                // resize: 'horizontal',
-                // overflow: 'auto'
-            }
-        },
+        }
     ]
 ]); 
 

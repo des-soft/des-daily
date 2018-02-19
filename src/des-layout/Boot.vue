@@ -56,6 +56,14 @@ export default {
 
 <style>
 
+.color-main {
+  color: rgb(92, 81, 99); 
+}
+
+.color-main-bg {
+  background-color: rgb(92, 81, 99); 
+}
+
 </style>
 
 

@@ -60,7 +60,7 @@ export default {
             }
 
             prev.style.width = parseInt(prev.style.width) + e.x + 'px'; 
-
+            next.style.width = parseInt(next.style.width) - e.x + 'px'; 
         }, 
         isArray(_){
             return Array.isArray(_); 
@@ -73,6 +73,15 @@ export default {
 .d-block {
     display: inline-block;
 }
+
+.d-line {
+    font-size: 0; 
+}
+
+.d-block {
+    font-size: 16px; 
+}
+
 .d-line {
     display: block;
 }

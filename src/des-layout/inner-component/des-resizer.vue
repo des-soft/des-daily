@@ -81,7 +81,7 @@ export default {
     background-color: #333; 
     user-select: none;
     height: 100%; 
-    width: 10px; 
+    width: 4px; 
     cursor: e-resize;
 }
 </style>

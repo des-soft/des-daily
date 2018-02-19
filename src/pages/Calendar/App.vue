@@ -1,14 +1,23 @@
 <template>
   <div id="app">
-    asd
+    <des-editor @change="onInput"></des-editor>
   </div>
 </template>
 
 <script>
-export default {
+import Editor from '../Editor/App'; 
 
+export default {
+  components: {
+    desEditor: Editor
+  }, 
   created(){
 
+  },
+  methods: {
+    onInput(text){
+      
+    }
   }
 }
 </script>

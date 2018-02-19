@@ -99,7 +99,7 @@ export default {
   tab-size: 4;
   font-size: 18px;
   /* font-family: consolas, menlo, Courier, monospace, Helvetica, sans-serif; */
-  font-family: consolas, menlo;
+  font-family: consolas, menlo, "微软雅黑";
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: normal;

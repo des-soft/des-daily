@@ -1,8 +1,8 @@
 <template>
-    <div @mousedown="down"
-         @mouseup="up"
-         @mouseleave="leave"
-        class="des-header color-main-bg">
+    <div class="des-header color-main-bg"
+        @mousedown="down"
+        @mouseup="up"
+        @mouseleave="leave">
         Des Daily
         <font-awesome-icon @click="close"
             class="to-right" :icon="['fa', 'times']" />
@@ -10,14 +10,13 @@
 </template>
 
 <script>
-// import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
-
 let { remote } = $require('electron'); 
 
-
+// 获取本渲染线程的 BrowserWindow 对象 
 let win = remote.getCurrentWindow(); 
 
-window.win = win; 
+// For Debug 
+// window.win = win; 
 
 export default {
     data(){
@@ -42,20 +41,13 @@ export default {
 
             let { screenX, screenY } = this.first; 
 
-            // let delta = {
-            //     x: e.clientX - clientX, 
-            //     y: e.clientY - clientY
-            // }
             let [x, y] = this.win_pos; 
             
-            
-            console.log(x, y); 
+            // 设置窗口位置
             win.setPosition(
                 x + (e.screenX - screenX),
                 y + (e.screenY - screenY)
             ); 
-
-            // delta
         }, 
         down(e){
             this.isDown = true;
@@ -70,13 +62,12 @@ export default {
         leave(e){
             this.isDown = false; 
         },
-        up(){
+        up(e){
             this.isDown = false; 
         }
     }
 }
 </script>
-
 
 <style scpoed>
 .des-header {
@@ -99,4 +90,3 @@ export default {
     cursor: pointer;
 }
 </style>
-

@@ -14,6 +14,12 @@ import LineBlock from './LineBlock';
 import Vue from 'vue'; 
 import DesResizer from './inner-component/des-resizer'; 
 import Boot from './Boot.vue'; 
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import fontawesome from '@fortawesome/fontawesome'
+// import brands from '@fortawesome/fontawesome-free-brands'
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
+
+fontawesome.library.add(faTimes); 
 
 let D = {}
 
@@ -26,6 +32,7 @@ D.install = function(Vue, option){
     Vue.prototype.$D = D; 
     Vue.component('d-line-block', LineBlock); 
     Vue.component('d-resizer', DesResizer); 
+    Vue.component('FontAwesomeIcon', FontAwesomeIcon); 
 
     Vue.prototype.$d_bus = new Vue(); 
 }

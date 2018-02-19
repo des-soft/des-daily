@@ -1,4 +1,5 @@
-const { app, BrowserWindow  } = require('electron'); 
+const { app, BrowserWindow, Notification  } = require('electron'); 
+
 
 const path = require('path'); 
 const url  = require('url'); 
@@ -13,8 +14,8 @@ let mainWindow;
 function createWindow(){
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 1024, 
-        frame: false,
+        height: 600, 
+        // frame: false,
         // transparent: true,
         // webPreferences: { experimentalFeatures: true }
         // experimentalFeatures
@@ -22,14 +23,22 @@ function createWindow(){
 
     mainWindow.loadURL(url.format({
         // pathname: path.join(__dirname, 'index.html'),
-        pathname: 'localhost:8080/editor.html',
+        pathname: 'localhost:8080/calendar.html',
         // protocol: 'file:',
         protocol: 'http', 
         slashes: true
     })); 
 
     mainWindow.show(); 
-}
 
+    let n = new Notification({
+        title: 'test',
+        body: '喵啦'
+    }); 
+
+    console.log(n); 
+    
+    n.show(); 
+}
 
 app.on('ready', createWindow)

@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-        Calendar
+    asd
   </div>
 </template>
 
 <script>
 export default {
+
+  created(){
+
+  }
 }
 </script>
 
 <style>
-body{
+body {
   margin:0;
-  background: #F3F3F3;
+  /* background-color: rgb(145, 170, 188);  */
+  /* background: #F3F3F3; */
 }
-ul{
+
+ul {
   margin:0;
   padding: 0;
 }

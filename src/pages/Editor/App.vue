@@ -1,7 +1,7 @@
 <template>
   <div class="des-editor">
     <div class="scroller">
-      <pre class="editor__inner content">{{ content }}</pre>
+      <pre spellcheck="false" class="editor__inner content">{{ content }}</pre>
     </div>
   </div>
 </template>
@@ -88,14 +88,18 @@ export default {
   overflow: auto; */
 }
 
+.des-editor {
+  /* max-width: 800px; */
+  /* margin: 0 auto; */
+  /* padding: 50px 100px 200px; */
+  /* color: rgba(0, 0, 0, 0.73); */
+}
+
 .content {
   tab-size: 4;
-  color: rgba(0, 0, 0, 0.73);
   font-size: 18px;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 50px 100px 200px;
-  font-family: consolas, menlo, Courier, monospace, Helvetica, sans-serif;
+  /* font-family: consolas, menlo, Courier, monospace, Helvetica, sans-serif; */
+  font-family: consolas, menlo;
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: normal;

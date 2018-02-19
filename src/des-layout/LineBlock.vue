@@ -16,6 +16,7 @@
             <component @d-resize="e => $emit('d-resize', e)" v-if="!isArray(blocks)"
                 class="d-block"
                 :is="blocks.component"
+                :class="blocks.class"
             ></component>
 
             <d-line-block v-else
@@ -23,6 +24,7 @@
                 :blocks="block"
                 @d-resize="e => resize(e, idx)"
                 :style="block.style"
+                :class="block.class"
             ></d-line-block>
         <!-- </div> -->
     </div>
@@ -71,19 +73,15 @@ export default {
 
 <style>
 .d-block {
+    position: relative;
     display: inline-block;
-}
-
-.d-line {
-    font-size: 0; 
-}
-
-.d-block {
     font-size: 16px; 
 }
 
 .d-line {
+    position: relative;
     display: block;
+    font-size: 0; 
 }
 </style>
 

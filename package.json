@@ -10,10 +10,10 @@
     "@fortawesome/vue-fontawesome": "0.0.22",
     "diff-match-patch": "^1.0.0",
     "node-sass": "^4.7.2",
+    "os-homedir": "^1.0.2",
     "prismjs": "^1.11.0",
     "then-fs": "^2.0.0",
     "turndown": "^4.0.1",
-    "user-home": "^2.0.0",
     "vue": "^2.5.2",
     "webpack": "^3.11.0"
   },

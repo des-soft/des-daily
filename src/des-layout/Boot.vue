@@ -3,6 +3,7 @@
          @mouseup="up"
          @mouseleave="leave"
          @mousedown="down"
+         class="app"
     >
         <d-line-block :blocks="line_block_table"></d-line-block>
     </div>
@@ -55,6 +56,9 @@ export default {
 </script>
 
 <style>
+.app {
+    overflow: hidden;
+}
 
 .color-main {
   color: rgb(92, 81, 99); 

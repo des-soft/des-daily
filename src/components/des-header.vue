@@ -5,7 +5,7 @@
         @mouseleave="leave">
         Des Daily
         <font-awesome-icon @click="close"
-            class="to-right" :icon="['fa', 'times']" />
+            class="to-right" :icon="['fa', 'times']"  />
     </div>
 </template>
 
@@ -71,6 +71,9 @@ export default {
 
 <style scpoed>
 .des-header {
+    position: relative;
+    z-index: 990;
+
     padding: 0 1em; 
     box-sizing: border-box; 
     width: 100%; 
@@ -79,6 +82,7 @@ export default {
     font-family: Consolas, Menlo; 
     color: rgb(161, 149, 168); 
     user-select: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
 }
 
 .to-right {

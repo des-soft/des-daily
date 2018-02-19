@@ -2,12 +2,9 @@
     <div class="des-resizer"
         @mousedown="down"
         @mouseup="up"
-        
         @mouseenter="enter"
         @mouseleave="leave"
-    >
-        +
-    </div>
+    ></div>
 </template>
 
 <script>
@@ -78,10 +75,11 @@ export default {
 
 <style>
 .des-resizer {
-    background-color: #333; 
+    background-color: rgb(92, 81, 99); 
     user-select: none;
+    font-size: 0; 
     height: 100%; 
-    width: 4px; 
+    width: 5px; 
     cursor: e-resize;
 }
 </style>

@@ -89,6 +89,7 @@ export default {
 }
 
 .des-editor {
+  display: block; 
   /* max-width: 800px; */
   /* margin: 0 auto; */
   /* padding: 50px 100px 200px; */

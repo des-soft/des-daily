@@ -22,7 +22,8 @@ D.$attach('#app', [
             component: DesAside, 
             style: {
                 'vertical-align': 'top', 
-                'width': '196px',
+                'width': '190px',
+                'height': '764px'
                 // resize: 'horizontal',
                 // overflow: 'auto'
             }
@@ -30,7 +31,8 @@ D.$attach('#app', [
         {
             component: 'd-resizer',
             style: {
-                height: '764px'
+                height: '764px',
+                width: '5px'
             }
         },
         // Editor 

@@ -1,5 +1,5 @@
 <template>
-    <div class="des-aside">
+    <div class="des-aside color-main-bg">
         侧边栏
     </div>
 </template>
@@ -12,7 +12,13 @@ export default {
 
 <style>
 .des-aside {
-    background-color: #E3E3E3; 
+    font-size: 14px; 
+    padding: 1em; 
+    box-sizing: border-box; 
+
+    /* background-color: rgb(68, 58, 85);  */
+    color: rgb(151, 139, 158); 
+
     width: 100%; 
     height: 100%;
 }

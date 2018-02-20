@@ -10,53 +10,67 @@ const Store = require('../Store')
     , { EventEmitter } = require('events')
 
 
-// mkdir 
-mkdir(DAILY_BASE); 
-
 let DPool = new EventEmitter();  
 
 module.exports = DPool; 
 
 // DPool
 
-// 只取 .md 文件 
-let files_names = fs.readdirSync(DAILY_BASE).filter(e => e.endsWith('.md'));
-// md 文件的绝对路径 
-let files_paths = files_names.map(e => path.join(DAILY_BASE, e)); 
-
 DPool.dailys = []; 
 
-// DPool.dailys = files_paths.map(e => new Daily(e)); 
+// git 服务准备好了 
 
-let watcher = chokidar.watch(DAILY_BASE); 
+let watcher = null; 
 
-watcher.on('add', file_path => {
-    let p = path.parse(file_path); 
+gitter.on('init', () => {
+    // mkdir 
+    mkdir(DAILY_BASE); 
 
-    // 排除 md 文件 
-    if (p.ext !== '.md') return; 
+    if (watcher) {
+        watcher.close(); 
+        DPool.dailys.forEach(d => d.unbind()); 
+    }
 
-    // DPool
-    let daily = new Daily(file_path); 
+    // init 
+    let files_names = fs.readdirSync(DAILY_BASE).filter(e => e.endsWith('.md'))
+    let files_paths = files_names.map(e => path.join(DAILY_BASE, e)); 
+    DPool.dailys = files_paths.map(e => new Daily(e)); 
 
-    DPool.dailys.push(daily)
+    // watcher 
+    watcher = chokidar.watch(DAILY_BASE, {
+        ignoreInitial: true
+    }); 
 
-    DPool.emit('add', daily); 
+    watcher.on('add', file_path => {
+        console.log('added!', file_path); 
+
+        let p = path.parse(file_path); 
+
+        // 排除 md 文件 
+        if (p.ext !== '.md') return; 
+
+        // DPool
+        let daily = new Daily(file_path); 
+
+        DPool.dailys.push(daily)
+
+        DPool.emit('add', daily); 
+    }); 
+
+    watcher.on('unlink', file_path => {
+        DPool.dailys = DPool.dailys.filter(daily => {
+            return !(daily.file_path === file_path); 
+        });
+    }); 
 }); 
 
-watcher.on('unlink', file_path => {
-    DPool.dailys = DPool.dailys.filter(daily => {
-        return !(daily.file_path === file_path); 
-    });
-}); 
-
-DPool.collector = function(){
+DPool.collector = () => gitter.ready.then(ok => {
     return Promise.all(
         DPool.dailys.map(daily => {
             return daily.getData(); 
         })
     ); 
-}
+})
 
 // setTimeout(() => {
 //     console.log(DPool.dailys.length); 

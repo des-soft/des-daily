@@ -13,6 +13,7 @@ const daily_dir = require('./daily_dir');
 const path = require('path'); 
 const git = require('simple-git'); 
 const git_base = path.join(daily_dir, 'git_base'); 
+const { EventEmitter } = require('events'); 
 
 // mkdir 
 const mkdir = require('../../utils/mkdir'); 
@@ -24,7 +25,7 @@ mkdir(git_base);
 
 // 让 simple-git cd 到 git_base 
 const git_shell = git(git_base); 
-let gitter = {}; 
+let gitter = new EventEmitter(); 
 
 gitter.git_base = git_base; 
 
@@ -103,7 +104,10 @@ gitter.init = function(){
         }
     }).catch(err => {
         return `all done but with some problem: ${err}`; 
-    });
+    }).then(ok => {
+        gitter.emit('init'); 
+        return ok; 
+    })
 }
 
-gitter.ready = gitter.init().catch(err => console.log(err)); 
+gitter.ready = gitter.init(); 

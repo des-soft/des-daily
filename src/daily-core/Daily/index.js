@@ -37,7 +37,6 @@ class Daily {
         }
     }
 
-    
     /**
      * @description 从磁盘中读取 file_path 返回 Promise 
      * @returns { Promise<String> } 
@@ -46,6 +45,13 @@ class Daily {
         return fs.readFile(this.file_path)
             .then(e => e.toString())
             .then(parse) 
+    }
+
+    /**
+     * @description 取消绑定
+     */
+    unbind() {
+        this.watcher.close(); 
     }
 }
 

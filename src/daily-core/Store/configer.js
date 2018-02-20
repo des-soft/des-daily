@@ -36,6 +36,16 @@ configer.init = () => {
 }
 
 /**
+ * @description reload data
+ */
+configer.reload = () => {
+    let raw_data = fs.readFileSync(config_file).toString(); 
+    configer.data = JSON.parse(raw_data);
+
+    return configer.data; 
+}
+
+/**
  * @returns { Object } configer
  */
 configer.save = () => {

@@ -1,4 +1,4 @@
-const collector = require('../Collector')
+const { collector } = require('../DPool')
     , get_methods = require('./get_methods')
     , QUERY_METHODS = get_methods()
 

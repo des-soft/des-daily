@@ -15,7 +15,7 @@ const git = require('simple-git');
 const git_base = path.join(daily_dir, 'git_base'); 
 
 // mkdir 
-const mkdir = require('../utils/mkdir'); 
+const mkdir = require('../../utils/mkdir'); 
 
 // rm -rf 
 const rimraf = require('rimraf-then'); 

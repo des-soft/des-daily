@@ -2,7 +2,7 @@
 // 七牛文档参阅 https://developer.qiniu.com/kodo/sdk/1289/nodejs 
 const qiniu = require('qiniu')
     , config = new qiniu.conf.Config()
-    , wait = require('../utils/wait')
+    , wait = require('../../utils/wait')
 
 let QINIU_DOMAIN = 'http://喵啦.com'
 	, accessKey = '***  deseczn  ***'

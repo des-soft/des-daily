@@ -15,7 +15,7 @@ qnx.init(
     qiniu_config.bucket
 ); 
 
-let io = {
+let store = {
     configer,
     gitter,
     qnx

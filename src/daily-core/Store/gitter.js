@@ -26,6 +26,8 @@ mkdir(git_base);
 const git_shell = git(git_base); 
 let gitter = {}; 
 
+gitter.git_base = git_base; 
+
 module.exports = gitter; 
 
 function initRepo(git_url){

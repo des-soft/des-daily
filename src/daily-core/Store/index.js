@@ -1,3 +1,4 @@
+const daily_dir = require('./daily_dir'); 
 const configer = require('./configer'); 
 
 configer.init(); 
@@ -18,7 +19,8 @@ qnx.init(
 let store = {
     configer,
     gitter,
-    qnx
+    qnx,
+    daily_dir
 }
 
 module.exports = store;

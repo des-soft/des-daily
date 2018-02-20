@@ -15,24 +15,28 @@ class Daily {
 
         // 绑定 watcher 
         this.watcher = chokidar.watch(file_path); 
+
+        // !!! 热更新 
+        this.watcher.on('change', path => {
+            this.data = null; 
+        }); 
     }
 
     /**
-     * @description 如果 data 存在，则不刷新数据，如果 data 不存在就刷新数据。
-     * @returns { Promise<Daily> }
+     * @description 带缓存的 getData 
+     * @returns { Promise<Object> }
      */
-    fresh() {
+    getData() {
         if (this.data) {
-            return Promise.resolve(this); 
-
+            return Promise.resolve(this.data); 
         } else {
             return this.read().then(data => { 
                 this.data = data; 
-                return this; 
+                return data; 
             }); 
-
         }
     }
+    
 
     /**
      * @description 从磁盘中读取 file_path 返回 Promise 

@@ -45,36 +45,5 @@ xxxxx 正文
 
 # 类使用方法
 
-比如我们的正文 `a.md` 
-
-``` markdown 
-daily {
-    tea: 123
-    title: 标题
-    date: 2018-02-20
-    tags: abc, dsd, asd
-}
-
-;;;;;; 
-
-
-喵啦！
-```
-
-一下为 js ： 
-
-``` js
-let a = new Daily('a.md'); 
-
-// 正文 
-console.log(a.data.content); 
-
-// meta 
-console.log(a.data.meta); 
-
-a.watcher.on('change', path => {
-    // 监听文件改动
-});
-```
-
+请看 `./test.js`
 

@@ -24,20 +24,20 @@ class Daily {
 
     /**
      * @description 带缓存的 getData 
-     * @returns { Promise<Object> }
+     * @returns { Promise<Daily> }
      */
     getData() {
         if (this.data) {
-            return Promise.resolve(this.data); 
+            return Promise.resolve(this); 
         } else {
             return this.read().then(data => { 
                 this.data = data; 
-                return data; 
+                return this; 
             }); 
         }
     }
-    
 
+    
     /**
      * @description 从磁盘中读取 file_path 返回 Promise 
      * @returns { Promise<String> } 

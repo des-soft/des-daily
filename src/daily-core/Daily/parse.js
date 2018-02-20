@@ -7,20 +7,24 @@ module.exports = parse;
  * @description 文件的解析器
  * @param { String } text 
  */
-function parse(text){
+function parse(text, sp = ';;;;;;'){
     // 六个 ; 分割文章为头部和正文
-    let arr = text.split(';;;;;;'); 
+    let arr = text.split(sp); 
 
     if (arr.length < 2){
         // 不合法的文章 
-        return null; 
+        // 应该换一个 sp 试试 , 递归 
+        if (sp === '------'){
+            return null; 
+        } else {
+            return parse(text, '------'); 
+        }
     } else {
         let [ head_text, ...contents ] = arr;
-        let content = contents.join(';;;;;;'); 
+        let content = contents.join(sp); 
 
         let meta = getMetaFrom(head_text); 
         // meta 还需要预处理一下， 比如 tags 字段得转化成数组 
-
 
         return {
             meta: beauty(meta), 

@@ -6,8 +6,8 @@ let readme = new Daily(README_FILE);
 
 console.log('因为打开了 watcher 监听文件改动，所以需要按 ctrl + c 结束');
 
-readme.fresh().then(data => {
-    console.log(data); 
+readme.getData().then(daily => {
+    console.log(daily.data); 
 }).catch(err => {
     console.log(err); 
 })

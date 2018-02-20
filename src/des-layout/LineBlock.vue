@@ -61,8 +61,15 @@ export default {
                 return console.warn('Resize 放在错误的位置了'); 
             }
 
-            prev.style.width = parseInt(prev.style.width) + e.x + 'px'; 
-            next.style.width = parseInt(next.style.width) - e.x + 'px'; 
+            let prevNew = parseInt(prev.style.width) + e.x;
+            let nextNew = parseInt(next.style.width) - e.x;
+
+            if(parseInt(prev.style.minWidth.slice(0,-2)) >= prevNew || parseInt(next.style.minWidth.slice(0,-2)) >= nextNew){
+                return;
+            }
+
+            prev.style.width = prevNew + 'px'; 
+            next.style.width = nextNew + 'px'; 
         }, 
         isArray(_){
             return Array.isArray(_); 

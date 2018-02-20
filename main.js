@@ -23,7 +23,7 @@ function createWindow(){
         useContentSize: true, 
         hasShadow: true, // Mac Only 
         // transparent: true,
-        titleBarStyle: 'hiddenInset'
+        titleBarStyle: 'customButtonsOnHover'
         // webPreferences: { experimentalFeatures: true }
         // experimentalFeatures
     }); 

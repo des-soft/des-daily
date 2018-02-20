@@ -23,10 +23,11 @@ D.$attach('#app', [
             style: {
                 'vertical-align': 'top', 
                 'width': '190px',
-                'height': '764px'
+                'height': '764px',
+                'minWidth':'190px'
                 // resize: 'horizontal',
                 // overflow: 'auto'
-            }
+            },
         },
         {
             component: 'd-resizer',
@@ -41,7 +42,8 @@ D.$attach('#app', [
             style: {
                 'vertical-align': 'top', 
                 width: '1000px', 
-                height: '764px'
+                height: '764px',
+                'minWidth':'300px'
             }
         }
     ]

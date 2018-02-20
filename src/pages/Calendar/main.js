@@ -22,7 +22,7 @@ D.$attach('#app', [
             component: DesAside, 
             style: {
                 'vertical-align': 'top', 
-                'width': '190px',
+                'width': '490px',
                 'height': '764px',
                 'minWidth':'190px'
                 // resize: 'horizontal',
@@ -41,7 +41,7 @@ D.$attach('#app', [
             component: DesEditor, 
             style: {
                 'vertical-align': 'top', 
-                width: '1000px', 
+                width: '600px', 
                 height: '764px',
                 'minWidth':'300px'
             }

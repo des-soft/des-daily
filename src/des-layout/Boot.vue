@@ -47,6 +47,7 @@ export default {
         },
         up(e){
             this.isDown = false; 
+            this.resizers.forEach(resizer => resizer.up(e)); 
         },
         down(e){
             this.isDown = true; 

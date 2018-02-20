@@ -1,12 +1,28 @@
 <template>
     <div class="des-aside color-main-bg">
-        侧边栏
+        <des-nav @change="navChange"></des-nav>
+        <component :is="`des-${nav}-panel`"></component>
     </div>
 </template>
 
 <script>
+import DesNav from './des-nav'
+import DesTimelinePanel from './des-timeline-panel'
+import DesCalendarPanel from './des-calendar-panel'
 export default {
-
+    components:{
+        DesNav,DesTimelinePanel,DesCalendarPanel
+    },
+    data(){
+        return {
+            nav:'timeline'
+        }
+    },
+    methods:{
+        navChange(value){
+            this.nav = value;
+        }
+    }
 }
 </script>
 
@@ -18,7 +34,7 @@ export default {
 
     /* background-color: rgb(68, 58, 85);  */
     color: rgb(151, 139, 158); 
-
+    user-select: none;
     width: 100%; 
     height: 100%;
 }

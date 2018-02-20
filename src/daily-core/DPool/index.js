@@ -64,13 +64,16 @@ gitter.on('init', () => {
     }); 
 }); 
 
+/**
+ * @returns { Promise<Array<Daily>> }
+ */
 DPool.collector = () => gitter.ready.then(ok => {
     return Promise.all(
         DPool.dailys.map(daily => {
             return daily.getData(); 
         })
     ); 
-})
+});
 
 // setTimeout(() => {
 //     console.log(DPool.dailys.length); 

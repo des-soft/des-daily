@@ -73,7 +73,7 @@ export default {
 .des-header {
     position: relative;
     z-index: 990;
-
+    text-align: center; 
     padding: 0 1em; 
     box-sizing: border-box; 
     width: 100%; 

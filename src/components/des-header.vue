@@ -4,8 +4,15 @@
         @mouseup="up"
         @mouseleave="leave">
         Des Daily
-        <font-awesome-icon @click="close"
-            class="to-right" :icon="['fa', 'times']"  />
+
+        <div class="to-right">
+            <font-awesome-icon @click="setting"
+                class="header-icon"
+                :icon="['fa', 'cog']"  />
+            <font-awesome-icon @click="close"
+                class="header-icon"
+                :icon="['fa', 'times']"  />
+        </div>
     </div>
 </template>
 
@@ -59,6 +66,9 @@ export default {
         close(e){
             win.close(); 
         },
+        setting(){
+            // ...
+        }, 
         leave(e){
             this.isDown = false; 
         },
@@ -90,7 +100,12 @@ export default {
     line-height: 36px; 
     height: 36px; 
     right: 0;
+    top: 0; 
     padding: 0 1em; 
     cursor: pointer;
+}
+
+.header-icon {
+    margin-left: 2px; 
 }
 </style>

@@ -48,4 +48,7 @@ function createWindow(){
     n.show(); 
 }
 
+const { ipcMain } = require('electron')
+
+
 app.on('ready', createWindow)

@@ -59,7 +59,12 @@ gitter.on('init', () => {
 
     watcher.on('unlink', file_path => {
         DPool.dailys = DPool.dailys.filter(daily => {
-            return !(daily.file_path === file_path); 
+            if (daily.file_path === file_path){
+                DPool.emit('unlink', daily); 
+                return false; 
+            } else {
+                return true; 
+            }
         });
     }); 
 }); 

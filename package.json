@@ -11,6 +11,7 @@
     "chokidar": "^2.0.2",
     "diff-match-patch": "^1.0.0",
     "md5": "^2.2.1",
+    "moment": "^2.20.1",
     "mv": "^2.1.1",
     "node-sass": "^4.7.2",
     "os-homedir": "^1.0.2",

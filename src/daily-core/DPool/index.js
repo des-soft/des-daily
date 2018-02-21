@@ -79,18 +79,3 @@ DPool.collector = () => gitter.ready.then(ok => {
         })
     ); 
 });
-
-DPool.collector().then(res => {
-    console.log(res); 
-})
-
-// setTimeout(() => {
-//     console.log(DPool.dailys.length); 
-// }, 3000); 
-
-
-// collector().then(dailys => {
-//     dailys.forEach(daily => {
-//         console.log(daily.data.meta); 
-//     })
-// }); 

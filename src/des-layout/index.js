@@ -17,9 +17,10 @@ import Boot from './Boot.vue';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 // import brands from '@fortawesome/fontawesome-free-brands'
+import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
-
 fontawesome.library.add(faTimes); 
+fontawesome.library.add(faCog); 
 
 let D = {}
 

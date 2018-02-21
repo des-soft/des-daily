@@ -11,9 +11,13 @@ class Bridge {
     }
 
     init(){
-        DPool.on('add', this.on_add);; 
+        DPool.on('add', path => {
+            this.webContents.send('DPool/add', path); 
+        });; 
 
-        DPool.on('unlink', this.on_unlink);
+        DPool.on('unlink', daily => {
+            this.webContents.send('DPool/add', daily); 
+        });
 
         ipcMain.on('DPool/collector', (event, ipc_id) => {
             console.log('[ Bridge ] DPool/collector, ipc_id:', ipc_id); 
@@ -30,14 +34,6 @@ class Bridge {
                 ); 
             })
         });
-    }
-
-    on_add(path){
-        this.webContents.send('DPool/add', path); 
-    }
-
-    on_unlink(daily){
-        this.webContents.send('DPool/add', daily); 
     }
 }
 

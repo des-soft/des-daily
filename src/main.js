@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Notification  } = require('electron'); 
-
+const Bridge = require('./daily-core/Bridge')
 
 const path = require('path'); 
 const url  = require('url'); 
@@ -37,6 +37,9 @@ function createWindow(){
     })); 
 
     mainWindow.show(); 
+
+
+    let b = new Bridge(mainWindow.webContents); 
 
     let n = new Notification({
         title: 'test',

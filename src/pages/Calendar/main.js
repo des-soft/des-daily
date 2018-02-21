@@ -24,7 +24,7 @@ D.$attach('#app', [
                 'vertical-align': 'top', 
                 'width': '490px',
                 'height': '764px',
-                'minWidth':'190px'
+                'minWidth':'300px'
                 // resize: 'horizontal',
                 // overflow: 'auto'
             },

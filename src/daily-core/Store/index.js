@@ -38,6 +38,10 @@ let store = {
     
         // 重新配置 
         gitter.ready = gitter.init(); 
+
+        return new Promise((res, rej) => {
+            gitter.once('init', res); 
+        }); 
     }
 }
 

@@ -20,7 +20,7 @@ class Bridge {
         });
 
         ipcMain.on('DPool/collector', (event, ipc_id) => {
-            console.log('[ Bridge ] DPool/collector, ipc_id:', ipc_id); 
+            // console.log('[ Bridge ] DPool/collector, ipc_id:', ipc_id); 
                 
             DPool.collector().then(data => {
                 this.webContents.send(

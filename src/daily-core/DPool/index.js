@@ -80,6 +80,10 @@ DPool.collector = () => gitter.ready.then(ok => {
     ); 
 });
 
+DPool.collector().then(res => {
+    console.log(res); 
+})
+
 // setTimeout(() => {
 //     console.log(DPool.dailys.length); 
 // }, 3000); 

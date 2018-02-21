@@ -1,10 +1,18 @@
-const ipcRenderer = $require('electron').ipcRenderer;
-
+const electron = $require('electron'); 
+const { remote, ipcRenderer } = electron;
 
 let bridge = {}
 let ipc_id = 0; 
 
+function getIpc_id(){
+    let i = ipc_id + 1; 
+    ipc_id = ipc_id + 1; 
+    return i; 
+}
+
 bridge.req = function(ns){
+    let ipc_id = getIpc_id();
+
     return new Promise((res, rej) => {
         ipcRenderer.once(ns + '/' + ipc_id, function(event, data){
             res(data); 
@@ -14,11 +22,13 @@ bridge.req = function(ns){
             rej(data); 
         }); 
 
-        ipcRenderer.send(ns, ipc_id.toString()); 
-
-        ipc_id = ipc_id + 1; 
+        setTimeout(() => {
+            ipcRenderer.send(ns, ipc_id.toString())
+        }, 0); 
     }); 
 }
+
+// bridge.DPool = remote.require('./daily-core/DPool'); 
 
 export default bridge; 
 

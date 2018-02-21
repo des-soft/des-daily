@@ -10,7 +10,7 @@ function getIpc_id(){
     return i; 
 }
 
-bridge.req = function(ns){
+bridge.req = function(ns, ...args){
     let ipc_id = getIpc_id();
 
     return new Promise((res, rej) => {
@@ -23,7 +23,7 @@ bridge.req = function(ns){
         }); 
 
         setTimeout(() => {
-            ipcRenderer.send(ns, ipc_id.toString())
+            ipcRenderer.send(ns, ipc_id.toString(), ...args); 
         }, 0); 
     }); 
 }

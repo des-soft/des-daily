@@ -1,4 +1,5 @@
 const DPool = require('../DPool')
+const Store = require('../Store')
 const { ipcMain } = require('electron')
 
 // Watch 
@@ -18,6 +19,15 @@ class Bridge {
         DPool.on('unlink', daily => {
             this.webContents.send('DPool/add', daily); 
         });
+
+        ipcMain.on('Store/reconfig', (event, ipc_id, config) => {
+            Store.reconfig(config).then(config_ok => {
+                this.webContents.send(
+                    `Store/reconfig/${ipc_id}`,
+                    'ok'
+                );
+            })
+        }); 
 
         ipcMain.on('DPool/collector', (event, ipc_id) => {
             // console.log('[ Bridge ] DPool/collector, ipc_id:', ipc_id); 

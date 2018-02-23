@@ -22,6 +22,8 @@ let { remote } = $require('electron');
 // 获取本渲染线程的 BrowserWindow 对象 
 let win = remote.getCurrentWindow(); 
 
+import DesConfig from '@/components/des-config'; 
+
 // For Debug 
 // window.win = win; 
 
@@ -34,13 +36,18 @@ export default {
                 screenX: 0, 
                 screenY: 0
             },
-            win_pos: [0, 0]
+            win_pos: [0, 0], 
+            setting_opened: false
         }
     },
     created(){
         let id = this.id; 
         this.$d_bus.$on(`d-drag-move-${id}`, e => this.move(e)); 
         this.$d_bus.$emit('d-resizer-reg', this); 
+
+        setTimeout(() => {
+            this.setting(); 
+        }, 1500); 
     }, 
     methods: {
         move(e){
@@ -68,6 +75,15 @@ export default {
         },
         setting(){
             // ...
+            if (this.setting_opened) return; 
+
+            this.setting_opened = true; 
+            this.$modal({
+                component: DesConfig
+            }).then(close => {
+                this.setting_opened = false; 
+                console.log('ok', close); 
+            }); 
         }, 
         leave(e){
             this.isDown = false; 
@@ -102,6 +118,9 @@ export default {
     right: 0;
     top: 0; 
     padding: 0 1em; 
+}
+
+.to-right > * {
     cursor: pointer;
 }
 

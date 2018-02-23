@@ -19,7 +19,9 @@ import fontawesome from '@fortawesome/fontawesome'
 // import brands from '@fortawesome/fontawesome-free-brands'
 import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
+import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
 fontawesome.library.add(faTimes); 
+fontawesome.library.add(faCheck); 
 fontawesome.library.add(faCog); 
 
 let D = {}

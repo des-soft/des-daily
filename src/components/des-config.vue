@@ -71,7 +71,7 @@ $des-config-bg:     rgb(240, 239, 240)
             letter-spacing: 2px
             font-size: 80%
             border-radius: 4px
-            margin-right: 1em
+            margin-left: 1em
 
         [yes] 
             background-color: rgb(92, 81, 99)
@@ -97,7 +97,7 @@ $des-config-bg:     rgb(240, 239, 240)
 
         <div class="line">
             <p class="fields">Qiniu Config</p>
-            <input type="text" disabled v-model="config.qiniu.ak"     placeholder="***** Qiniu Access Key *****" />
+            <input type="text" v-model="config.qiniu.ak"     placeholder="***** Qiniu Access Key *****" />
             <input type="text" v-model="config.qiniu.sk"     placeholder="***** Qiniu Secret Key *****" />
             <input type="text" v-model="config.qiniu.bucket" placeholder="***** Qiniu Bucket     *****" />
             <input type="text" v-model="config.qiniu.domain" placeholder="***** Qiniu Domain     *****" />

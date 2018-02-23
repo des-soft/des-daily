@@ -47,7 +47,7 @@ export default {
 
         setTimeout(() => {
             this.setting(); 
-        }, 1500); 
+        }, 300); 
     }, 
     methods: {
         move(e){

@@ -3,8 +3,7 @@
          @mouseup="up"
          @mouseleave="leave"
          @mousedown="down"
-         class="app"
-    >
+         class="app">
         <d-line-block :blocks="line_block_table"></d-line-block>
 
         <div class="modal-container" v-if="modals.length !== 0">

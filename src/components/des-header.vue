@@ -45,9 +45,9 @@ export default {
         this.$d_bus.$on(`d-drag-move-${id}`, e => this.move(e)); 
         this.$d_bus.$emit('d-resizer-reg', this); 
 
-        setTimeout(() => {
-            this.setting(); 
-        }, 300); 
+        // setTimeout(() => {
+        //     this.setting(); 
+        // }, 300); 
     }, 
     methods: {
         move(e){

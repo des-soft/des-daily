@@ -15,6 +15,7 @@ import Vue from 'vue';
 import DesResizer from './inner-component/des-resizer'; 
 import Boot from './Boot.vue'; 
 import $bridge from '@/daily-core/Bridge/client'; 
+import $Q from '@/daily-core/Query'
 
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
@@ -52,6 +53,7 @@ D.install = function(Vue, option){
     // test debug 
     window.$bridge = $bridge; 
     Vue.prototype.$bridge = $bridge;
+    Vue.prototype.$Q = $Q;
     Vue.prototype.$d_bus = new Vue(); 
 }
 

@@ -28,7 +28,5 @@ bridge.req = function(ns, ...args){
     }); 
 }
 
-// bridge.DPool = remote.require('./daily-core/DPool'); 
-
 export default bridge; 
 

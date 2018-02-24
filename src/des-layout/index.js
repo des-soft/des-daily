@@ -14,7 +14,7 @@ import LineBlock from './LineBlock';
 import Vue from 'vue'; 
 import DesResizer from './inner-component/des-resizer'; 
 import Boot from './Boot.vue'; 
-import $bridge from '@/daily-core/bridge/client'; 
+import $bridge from '@/daily-core/Bridge/client'; 
 
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'

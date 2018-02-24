@@ -17,4 +17,7 @@ Q.define = (name, filter) => {
     return Q; 
 }
 
+// for debug 
+window.Q = Q; 
+
 export default Q; 

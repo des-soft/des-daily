@@ -21,6 +21,8 @@ class Bridge {
         });
 
         ipcMain.on('Store/reconfig', (event, ipc_id, config) => {
+            console.log('[ Bridge ] reconfig', config); 
+
             Store.reconfig(config).then(config_ok => {
                 this.webContents.send(
                     `Store/reconfig/${ipc_id}`,
@@ -30,8 +32,8 @@ class Bridge {
         }); 
 
         ipcMain.on('DPool/collector', (event, ipc_id) => {
-            // console.log('[ Bridge ] DPool/collector, ipc_id:', ipc_id); 
-                
+            console.log('[ Bridge ] DPool/collector, ipc_id:', ipc_id); 
+
             DPool.collector().then(data => {
                 this.webContents.send(
                     `DPool/collector/${ipc_id}`,

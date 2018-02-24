@@ -5,10 +5,6 @@ import DesEditor from '@/components/Editor/index.vue'
 import DesHeader from '../../components/des-header'; 
 import DesAside from '../../components/des-aside'; 
 
-import bridge from '@/daily-core/bridge/client'; 
-
-window.bridge = bridge; 
-
 Vue.use(D); 
 
 D.$attach('#app', [

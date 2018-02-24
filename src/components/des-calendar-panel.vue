@@ -1,38 +1,52 @@
 <template>
     <div class="des-calendar-panel">
-        <table class="des-calendar-panel-table">
-            <thead class="des-calendar-panel-table-thead">
-                <tr>
-                    <th>一</th>
-                    <th>二</th>
-                    <th>三</th>
-                    <th>四</th>
-                    <th>五</th>
-                    <th>六</th>
-                    <th>日</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(row,idx) in tableData(2018,2,{ 1:2, 3:1 })" :key="idx" class="des-calendar-panel-table-tr">
-                    <td v-for="(col,idx) in row" :key="idx" class="des-calendar-panel-table-td">
-                        <div v-if="col">
-                            {{col.num}}
-                            <div class="des-calendar-panel-table-count-wrapper">
-                                <div class="des-calendar-panel-table-count" v-for="n in col.noteCount" :key="n"></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="info">
+          <span class="info-year">
+            <input type="text" :value="curYear" v-show="yearInputing" class="info-input" ref="yearInput" @change="changeCur('year',arguments[0].target.value)">
+            <span @dblclick="dblclick('year')" v-show="!yearInputing">{{curYear}}</span>
+          </span> 年 
+          <span v-show="curMonth">
+            <span class="info-month" v-show="curMonth">
+              <input type="text" :value="curMonth" v-show="monthInputing" class="info-input" ref="monthInput" @change="changeCur('month',arguments[0].target.value)">
+              <span @dblclick="dblclick('month')" v-show="!monthInputing">{{curMonth}}</span>
+            </span> 月
+          </span>
+          <div class="control-bar">
+            <des-button @click="overview" :disabled="!curMonth">
+              <font-awesome-icon :icon="['fa', 'th']"  />
+            </des-button>
+            <des-button @click="prev" :disabled="curMonth && curMonth<=1 || !curMonth && curYear<=2018">
+              <font-awesome-icon :icon="['fa', 'angle-left']"  />
+            </des-button>
+            <des-button @click="next" :disabled="curMonth && curMonth>=12">
+              <font-awesome-icon :icon="['fa', 'angle-right']"  />
+            </des-button>
+          </div>
+        </div>
+        <des-calendar :year="curYear" :month="curMonth" size="large" v-if="curMonth"></des-calendar>
+        <des-calendar-overview :year="curYear" v-else @click="chooseMonth(arguments[0])"></des-calendar-overview>
     </div>
 </template>
 
 <script>
 import moment from "moment";
+import DesCalendarOverview from "./des-calendar-overview";
+import DesCalendar from "./des-calendar";
+import DesButton from "./des-button";
 export default {
+  components: {
+    DesCalendarOverview,
+    DesButton,
+    DesCalendar
+  },
   data() {
     return {
+      curYear: 2018,
+      curMonth: 2,
+      nowYear: 2018,
+      nowMonth: 2,
+      yearInputing: false,
+      monthInputing: false,
       data: [
         {
           year: 2018,
@@ -50,75 +64,73 @@ export default {
     };
   },
   methods: {
-    rowCountInMonth(y, m) {
-      return (
-        (daysInMonth(y, m) + moment(`${y}-${m}`, "YYYY-MM").day() - 1) / 7 + 1
-      );
+    overview() {
+      this.curMonth = null;
     },
-    daysInMonth(y, m) {
-      return moment(`${y}-${m}`, "YYYY-MM").daysInMonth();
+    dblclick(type) {
+      if(type == 'year'){
+        this.yearInputing = true;
+        this.$refs.yearInput.focus();
+      }else{
+        this.monthInputing = true;
+        this.$refs.monthInput.focus();
+      }
     },
-    tableData(y, m, dayNoteMap) {
-      let data = [];
-      data[0] = new Array(moment(`${y}-${m}`, "YYYY-MM").day() - 1 || 1).fill(
-        null
-      );
-      function push(item) {
-        let arr = null;
-        if (data[data.length - 1].length == 7) {
-          arr = [];
-          data.push(arr);
-        } else {
-          arr = data[data.length - 1];
-        }
-        arr.push(item);
+    changeCur(type,value){
+      if(type == 'year'){
+        value = Math.min(2099,value);
+        value = Math.max(2018,value);
+        this.curYear = value;
+        this.yearInputing = false;
+      }else{
+        value = Math.min(12,value);
+        value = Math.max(1,value);
+        this.curMonth = value;
+        this.monthInputing = false;
       }
-      for (let i = 1; i <= this.daysInMonth(y, m); i++) {
-        push({
-          num: i,
-          noteCount: dayNoteMap[i] || 0
-        });
+    },
+    chooseMonth(month) {
+      this.curMonth = month;
+    },
+    prev() {
+      if (this.curMonth && this.curMonth > 1) {
+        this.curMonth--;
+      } else if (!this.curMonth && this.curYear > 2018) {
+        this.curYear--;
       }
-
-      //尾行补全成7列
-      let lastArr = data[data.length - 1];
-      for (let i = lastArr.length; i <= 7; i++) {
-        lastArr[i] = null;
+    },
+    next() {
+      if (this.curMonth && this.curMonth < 12) {
+        this.curMonth++;
+      } else if (!this.curMonth) {
+        this.curYear++;
       }
-      return data;
     }
   }
 };
 </script>
 
 <style>
-.des-calendar-panel-table {
-  width: 100%;
-  margin: 20px 10px;
+.des-calendar-panel {
+  padding-top: 20px;
 }
-.des-calendar-panel-table-td {
-  text-align: center;
-  font-size: 25px;
+.info {
+  font-size: 20px;
+  padding: 0 10px 10px;
 }
-.des-calendar-panel-table-td:hover{
-    color:whitesmoke;
+.control-bar {
+  font-size: 20px;
+  float: right;
 }
-.des-calendar-panel-table-count-wrapper {
-  height: 5px;
-  line-height: 5px;
-  max-width: 90%;
-  margin-left: 20%;
-  margin-bottom: 10px;
-  font-size: 0;
+.info-month .info-input{
+  width: 25px
 }
-.des-calendar-panel-table-count {
-  display: inline-block;
-  background: lightgray;
-  width: 5px;
-  height: 5px;
-  margin-right: 5px;
-}
-.des-calendar-panel-table-thead{
-    font-size: 18px;
+.info-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: whitesmoke;
+  width: 50px;
 }
 </style>

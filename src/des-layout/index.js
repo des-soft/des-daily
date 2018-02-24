@@ -14,15 +14,20 @@ import LineBlock from './LineBlock';
 import Vue from 'vue'; 
 import DesResizer from './inner-component/des-resizer'; 
 import Boot from './Boot.vue'; 
+import $bridge from '@/daily-core/bridge/client'; 
+
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 // import brands from '@fortawesome/fontawesome-free-brands'
 import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
+import faCircleNotch from '@fortawesome/fontawesome-free-solid/faCircleNotch'
+
 fontawesome.library.add(faTimes); 
 fontawesome.library.add(faCheck); 
 fontawesome.library.add(faCog); 
+fontawesome.library.add(faCircleNotch);
 
 let D = {}
 
@@ -37,6 +42,9 @@ D.install = function(Vue, option){
     Vue.component('d-resizer', DesResizer); 
     Vue.component('FontAwesomeIcon', FontAwesomeIcon); 
 
+    // test debug 
+    window.$bridge = $bridge; 
+    Vue.prototype.$bridge = $bridge;
     Vue.prototype.$d_bus = new Vue(); 
 }
 

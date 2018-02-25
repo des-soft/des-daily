@@ -5,5 +5,9 @@ module.exports = function beauty(obj){
         obj.tags = tags_str.split(',').map(e => e.trim()).filter(e => e); 
     }
 
+    if (obj.date) {
+        obj.date = new Date(obj.date); 
+    }
+
     return obj; 
 }

@@ -36,11 +36,10 @@ let store = {
             qiniu_config.bucket
         ); 
     
-        // 重新配置 
-        gitter.ready = gitter.init(); 
-
+        // 重新 init 配置 
         return new Promise((res, rej) => {
             gitter.once('init', res); 
+            gitter.ready = gitter.init(); 
         }); 
     }
 }

@@ -86,6 +86,8 @@ gitter.saveAll = function(msg){
 gitter.init = function(){
     let { git_url } = configer.data; 
 
+    console.log('[ gitter to init ]', git_url); 
+
     if (!git_url) {
         console.log('git_url Not Found');
         return Promise.resolve('config.git_url not found'); 
@@ -94,7 +96,8 @@ gitter.init = function(){
     return gitter.checkIsRepo().then(isRepo => {
         if (isRepo){
             // 嗯。。。 
-            return pullRepo(); 
+            // return pullRepo(); 
+            return Promise.resolve('INIT OK');
         } else {
             // 不是仓库 
             console.log('不是仓库'); 
@@ -105,6 +108,7 @@ gitter.init = function(){
     }).catch(err => {
         return `all done but with some problem: ${err}`; 
     }).then(ok => {
+        console.log('[ init end ]', ok); 
         gitter.emit('init'); 
         return ok; 
     })

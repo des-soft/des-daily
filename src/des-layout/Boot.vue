@@ -16,19 +16,31 @@
                     hidden: modal.__hidden
                 }"
 
+                v-bind="modal.props"
+
                 @close="onModalClose(idx)"
                 
                 class="modal"
             ></component>
         </div>
+
+        <transition name="dml">
+            <div v-if="onLoading" class="loading-layout">
+                <d-m-l />
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import DML from '@/des-layout/inner-component/des-modal-loading';
 
 export default {
     name: 'Boot',
+    components: {
+        "d-m-l": DML
+    },
     data: {
         first: {
             isDown: false,
@@ -42,7 +54,8 @@ export default {
             }
         },
         resizers: [], 
-        modals: []
+        modals: [],
+        onLoading: false
     },
     created(){
         this.$d_bus.$on('d-resizer-reg', resizer => {
@@ -64,6 +77,21 @@ export default {
             }); 
 
             return ret; 
+        }
+
+        Vue.prototype.$loading = time => {
+            this.onLoading = true; 
+
+            let endLoading = () => (this.onLoading = false);  
+
+            if (time) endLoading.timeout = Promise((res, rej) => {
+                setTimeout(() => {
+                    this.onLoading = false; 
+                    res(); 
+                }, time); 
+            }); 
+
+            return endLoading; 
         }
     }, 
     methods: {
@@ -121,7 +149,17 @@ export default {
             transition: all .4s 
             transform: translateX(-50%) translateY(0%)
         .modal.hidden   
-            transform: translateX(-50%) translateY(-110%)
+            transform: translateX(-50%) translateY(calc(-110% - 30px))
+
+    .loading-layout
+        position: fixed
+        z-index: 999
+        bottom: 0
+        right: 0
+        padding: 16px 20px
+
+        
+        
 </style>
 
 <style>
@@ -133,6 +171,13 @@ export default {
     background-color: rgb(92, 81, 99);
 }
 
+.dml-enter-active, .dml-leave-active {
+    transition: all .5s;
+}
 
+.dml-enter, .dml-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    /* opacity: 0; */
+    transform: translateY(120%) scale(1.5); 
+}
 </style>
 

@@ -33,6 +33,8 @@ import moment from "moment";
 import DesCalendarOverview from "./des-calendar-overview";
 import DesCalendar from "./des-calendar";
 import DesButton from "./des-button";
+import Vue from 'vue'
+
 export default {
   components: {
     DesCalendarOverview,
@@ -68,10 +70,14 @@ export default {
     dblclick(type) {
       if(type == 'year'){
         this.yearInputing = true;
-        this.$refs.yearInput.focus();
+        Vue.nextTick(() => {
+          this.$refs.yearInput.focus();
+        }); 
       }else{
         this.monthInputing = true;
-        this.$refs.monthInput.focus();
+        Vue.nextTick(() => {
+          this.$refs.monthInput.focus();
+        });
       }
     },
     changeCur(type,value){

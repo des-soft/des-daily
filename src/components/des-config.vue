@@ -104,7 +104,8 @@ $des-config-bg:     rgb(240, 239, 240)
         </div>
 
         <div class="btns">
-            <span yes class="btn">
+            <span yes class="btn"
+                @click="useConfig">
                 <font-awesome-icon
                     class="header-icon"
                     :icon="['fa', 'check']"  />
@@ -135,7 +136,8 @@ export default {
                     bucket: '',
                     domain: ''
                 }
-            }
+            },
+            onloading: false
         }
     }, 
     watch: {
@@ -146,7 +148,28 @@ export default {
         }
     },
     methods: {
+        useConfig(){
+            if (this.onloading) return; 
 
+            let config = JSON.parse(JSON.stringify(this.config)); 
+
+            // config
+            this.onloading = true; 
+
+            let closeLoading = this.$loading(); 
+            
+            this.$bridge.req('Store/reconfig', config).then(ok => {
+                // it works 
+                this.onloading = false;
+                closeLoading(); 
+
+                this.$d_bus.$emit('reconfig-success'); 
+                
+                this.$bridge.req('DPool/collector').then(console.log); 
+            }).catch(err => {
+                alert(err); 
+            })
+        }
     }
 }
 </script>

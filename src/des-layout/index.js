@@ -14,12 +14,16 @@ import LineBlock from './LineBlock';
 import Vue from 'vue'; 
 import DesResizer from './inner-component/des-resizer'; 
 import Boot from './Boot.vue'; 
+import $bridge from '@/daily-core/Bridge/client'; 
+import $Q from '@/daily-core/Query'
+
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 // import brands from '@fortawesome/fontawesome-free-brands'
 import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
+import faCircleNotch from '@fortawesome/fontawesome-free-solid/faCircleNotch'
 import faTh from '@fortawesome/fontawesome-free-solid/faTh'
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
@@ -27,10 +31,12 @@ import faEdit from '@fortawesome/fontawesome-free-solid/faEdit'
 fontawesome.library.add(faTimes); 
 fontawesome.library.add(faCheck); 
 fontawesome.library.add(faCog); 
+fontawesome.library.add(faCircleNotch);
 fontawesome.library.add(faTh); 
 fontawesome.library.add(faAngleLeft); 
 fontawesome.library.add(faAngleRight); 
 fontawesome.library.add(faEdit); 
+
 
 let D = {}
 
@@ -45,6 +51,10 @@ D.install = function(Vue, option){
     Vue.component('d-resizer', DesResizer); 
     Vue.component('FontAwesomeIcon', FontAwesomeIcon); 
 
+    // test debug 
+    window.$bridge = $bridge; 
+    Vue.prototype.$bridge = $bridge;
+    Vue.prototype.$Q = $Q;
     Vue.prototype.$d_bus = new Vue(); 
 }
 

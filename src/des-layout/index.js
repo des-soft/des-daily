@@ -23,12 +23,14 @@ import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
 import faTh from '@fortawesome/fontawesome-free-solid/faTh'
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
+import faEdit from '@fortawesome/fontawesome-free-solid/faEdit'
 fontawesome.library.add(faTimes); 
 fontawesome.library.add(faCheck); 
 fontawesome.library.add(faCog); 
 fontawesome.library.add(faTh); 
 fontawesome.library.add(faAngleLeft); 
 fontawesome.library.add(faAngleRight); 
+fontawesome.library.add(faEdit); 
 
 let D = {}
 

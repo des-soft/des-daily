@@ -1,6 +1,6 @@
 <template>
       <table class="des-calendar" :style="{
-        fontSize:size == 'large' ? '20px' : '10px'
+        fontSize:size == 'large' ? '20px' : '8px'
       }">
           <thead>
               <tr>
@@ -18,8 +18,8 @@
                   <td v-for="(col,idx) in row" :key="idx">
                       <div v-if="col">
                           {{col.num}}
-                          <div class="des-calendar-count-wrapper">
-                              <div class="des-calendar-count" v-for="n in col.noteCount" :key="n"></div>
+                          <div :class="['des-calendar-count-wrapper',{'des-calendar-count-wrapper__large':size=='large'}]">
+                              <div :class="['des-calendar-count',{'des-calendar-count__large':size=='large'}]" v-for="n in col.noteCount" :key="n"></div>
                           </div>
                       </div>
                   </td>
@@ -36,7 +36,7 @@ export default {
     month:Number,
     dayMap:{
       type:Object,
-      default:()=>({})
+      default:()=>({1:2,2:10,3:1})
     },
     size:{
       type:String,
@@ -70,7 +70,7 @@ export default {
       for (let i = 1; i <= daysInMonth(y, m); i++) {
         push({
           num: i,
-          noteCount: dayNoteMap[i] || 0
+          noteCount: dayNoteMap[i] ? Math.max(0,Math.min(4,dayNoteMap[i])) : 0
         });
       }
 
@@ -88,28 +88,37 @@ export default {
 <style>
 .des-calendar {
   width: 100%;
-  font-size: 10px;
 }
 .des-calendar td,
 .des-calendar th {
   text-align: center;
-  height: 1.6em;
+  height: 2em;
 }
 .des-calendar td:hover {
   color: whitesmoke;
 }
 .des-calendar-count-wrapper {
-  height: 0.2em;
-  margin: 0.2em 0 0 45%;
+  height: 1px;
+  margin: 1px auto 0;
   font-size: 0;
+  text-align: center;
+}
+.des-calendar-count-wrapper__large{
+  height: 4px;
+  margin: 2px 0 0 43%;
   text-align: left;
 }
 .des-calendar-count {
   display: inline-block;
   background: lightgray;
-  width: 0.2em;
-  height: 0.2em;
-  margin-right: 0.1em;
+  width: 2px;
+  height: 2px;
+  margin-right: 1px;
+}
+.des-calendar-count__large{
+  width: 5px;
+  height: 5px;
+  margin-right: 2px;
 }
 .des-calendar th {
   font-size: 0.8em;

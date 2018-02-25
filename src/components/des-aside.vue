@@ -29,7 +29,7 @@ export default {
 <style>
 .des-aside {
     font-size: 14px; 
-    padding: 1em; 
+    padding: 1em 0 1em 1.5em; 
     box-sizing: border-box; 
 
     /* background-color: rgb(68, 58, 85);  */

@@ -12,7 +12,7 @@
             </span> 月
           </span>
           <div class="control-bar">
-            <des-button @click="overview" :disabled="!curMonth">
+            <des-button style="margin-right:10px" @click="overview" :disabled="!curMonth">
               <font-awesome-icon :icon="['fa', 'th']"  />
             </des-button>
             <des-button @click="prev" :disabled="curMonth && curMonth<=1 || !curMonth && curYear<=2018">
@@ -43,8 +43,6 @@ export default {
     return {
       curYear: 2018,
       curMonth: 2,
-      nowYear: 2018,
-      nowMonth: 2,
       yearInputing: false,
       monthInputing: false,
       data: [
@@ -113,10 +111,11 @@ export default {
 <style>
 .des-calendar-panel {
   padding-top: 20px;
+  padding-right: 20px;
 }
 .info {
   font-size: 20px;
-  padding: 0 10px 10px;
+  padding-bottom: 10px;
 }
 .control-bar {
   font-size: 20px;

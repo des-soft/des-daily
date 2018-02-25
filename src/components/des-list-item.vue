@@ -7,7 +7,7 @@
         <div class="left" @click="click">
             <h4 class="des-list-item-title">{{title}}</h4>
             <div class="des-list-item-info">
-                <span class="des-list-item-time">{{time}}</span>
+                <span class="des-list-item-time">{{time.format('YYYY-MM-DD HH:mm:ss')}}</span>
                 <span class="des-list-item-tags">
                     <span class="des-list-item-tag" v-for="tag in tags" :key="tag.id">#{{tag.name}}</span>
                 </span>
@@ -23,7 +23,7 @@ moment.locale('zh-cn')
 export default {
     props:{
         title:String,
-        time:String,
+        time:Object,
         author:String,
         tags:Array,
         firstOfDay:Boolean
@@ -34,10 +34,10 @@ export default {
     },
     computed:{
         week(){
-            return moment(this.time).format('ddd')
+            return this.time.format('ddd')
         },
         day(){
-            return moment(this.time).format('DD')
+            return this.time.format('DD')
         }
     },
     methods:{

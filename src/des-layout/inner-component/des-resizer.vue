@@ -34,7 +34,6 @@ export default {
             // this.isDown = false; 
         }, 
         up(e){
-            console.log('up!', e); 
             this.isDown = false; 
         }, 
         move(e){

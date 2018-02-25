@@ -28,9 +28,9 @@
         <div class="list">
           <des-list-item v-for="(daily,idx) in list" :key="idx"
         :title="daily.meta.title"
-        :time="daily.meta.date"
+        :time="daily.meta.time"
         :author="daily.meta.author"
-        :tags="daily.meta.tag.split(',').map(e=>({name:e.trim()}))"></des-list-item>
+        :tags="daily.meta.tags.map(e=>({name:e}))"></des-list-item>
         </div>
     </div>
 </template>
@@ -45,8 +45,8 @@ import Q from "../daily-core/Query";
 import Vue from "vue";
 Q.define("countMap", list => {
   let map = {};
-  list.forEach(({ meta: { date } }) => {
-    let d = moment(date);
+  list.forEach(({ meta: { time } }) => {
+    let d = moment(time);
     let year = d.format("YYYY");
     let month = d.format("M");
     let day = d.format("D");
@@ -79,7 +79,6 @@ export default {
   },
   created() {
     Q.countMap().then(countMap => {
-      console.log(countMap)
       this.countMap = countMap;
     });
   },
@@ -89,7 +88,10 @@ export default {
     },
     chooseDay(day) {
       Q.date(`${this.curYear}-${this.curMonth}-${day}`).then(list => {
-        this.list = list;
+        this.list = list.map(obj=>{
+          obj.meta.time = moment(obj.meta.time)
+          return obj
+        });
       });
     },
     dblclick(type) {

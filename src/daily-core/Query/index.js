@@ -33,7 +33,7 @@ Q.date = date => {
         'DPool/collector'
     ).then(list => {
         return sortByDate(list.filter(e => {
-            return moment(e.meta.date).isSame(date,'day')
+            return moment(e.meta.time).isSame(date,'day')
         }))
     })
 }

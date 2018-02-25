@@ -2,11 +2,12 @@
 <div class="des-timeline-panel">
     <div class="des-timeline-list">
         <des-list-item v-for="(daily,idx) in data" :key="idx"
+        @click="chooseDaily(daily)"
         :title="daily.meta.title"
-        :time="daily.meta.date"
+        :time="daily.meta.time"
         :author="daily.meta.author"
-        :tags="daily.meta.tag.split(',').map(e=>({name:e.trim()}))"
-        :firstOfDay="idx == 0 || !moment(daily.meta.date).isSame(data[idx-1].meta.date,'day')"></des-list-item>
+        :tags="daily.meta.tags.map(e=>({name:e}))"
+        :firstOfDay="idx == 0 || !daily.meta.time.isSame(data[idx-1].meta.time,'day')"></des-list-item>
     </div>
     <div class="des-timeline-pagination">
         <div class="des-timeline-pagination-controls">
@@ -51,8 +52,10 @@ export default {
   },
   created() {
     Q.pagination(1).then(list => {
-      console.log(list);
-      this.data = list;
+      this.data = list.map(obj=>{
+        obj.meta.time = moment(obj.meta.time);
+        return obj;
+      });
     });
     Q.total().then(total => (this.pagination.total = total));
   },
@@ -73,11 +76,9 @@ export default {
   },
   methods: {
     pageChange(n) {
-      console.log(n);
       this.pagination.page = n;
     },
     jump(n) {
-      console.log(n);
       this.pagination.page = Math.max(Math.min(this.totalPage, n), 1);
     },
     prev() {
@@ -89,6 +90,9 @@ export default {
       if (this.pagination.page < this.totalPage) {
         this.pagination.page++;
       }
+    },
+    chooseDaily(daily){
+
     }
   }
 };

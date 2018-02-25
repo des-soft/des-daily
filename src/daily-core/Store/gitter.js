@@ -74,8 +74,9 @@ gitter.add = gitter.promisify('add');
 gitter.commit = gitter.promisify('commit'); 
 gitter.push = gitter.promisify('push'); 
 gitter.checkIsRepo = gitter.promisify('checkIsRepo'); 
+gitter.pullRepo = pullRepo; 
 
-gitter.saveAll = function(msg){
+gitter.add_commit_push = function(msg){
     return gitter.add('./*').then(ok => {
         return gitter.commit(msg); 
     }).then(commit_ok => {

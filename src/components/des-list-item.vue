@@ -4,13 +4,13 @@
             {{week}}
             <p>{{day}}</p>
         </div>
-        <div class="left">
+        <div class="left" @click="click">
             <h4 class="des-list-item-title">{{title}}</h4>
             <div class="des-list-item-info">
                 <span class="des-list-item-time">{{time}}</span>
-                <!-- <span class="des-list-item-tags">
+                <span class="des-list-item-tags">
                     <span class="des-list-item-tag" v-for="tag in tags" :key="tag.id">#{{tag.name}}</span>
-                </span> -->
+                </span>
                 <span class="des-list-item-author">by {{author}}</span>
             </div>
         </div>
@@ -25,6 +25,7 @@ export default {
         title:String,
         time:String,
         author:String,
+        tags:Array,
         firstOfDay:Boolean
     },
     data(){
@@ -38,6 +39,11 @@ export default {
         day(){
             return moment(this.time).format('DD')
         }
+    },
+    methods:{
+        click(){
+            this.$emit('click')
+        }
     }
 }
 </script>
@@ -47,13 +53,13 @@ export default {
 }
 .des-list-item .left{
     margin-right: 50px;
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 .des-list-item .right{
     float: right;
     width: 50px;
     text-align: right;
-    padding-top: 15px;
+    padding-top: 20px;
 }
 .des-list-item .right p{
     font-size: 20px;
@@ -67,7 +73,7 @@ export default {
 }
 .des-list-item-title{
     font-size: 16px;
-    margin:10px 0;
+    margin-bottom:10px;
 }
 .des-list-item-tags{
     margin:0 10px;

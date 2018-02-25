@@ -1,7 +1,9 @@
-import $bridge from '@/daily-core/Bridge/client.js'; 
+import $bridge from '@/daily-core/Bridge/client.js';
+import moment from 'moment';
 
-let Q = {}; 
+let Q = {};
 
+let pageSize = 15;
 /**
  * @description 定义 filter 
  * @param { String   }  name    filter 名字
@@ -14,10 +16,35 @@ Q.define = (name, filter) => {
         ).then(filter)
     }
 
-    return Q; 
+    return Q;
+}
+
+Q.pagination = page => {
+    return $bridge.req(
+        'DPool/collector'
+    ).then(list => {
+        let sortedList = sortByDate(list);
+        return sortedList.slice((page - 1) * pageSize, page * pageSize)
+    })
+}
+
+Q.date = date => {
+    return $bridge.req(
+        'DPool/collector'
+    ).then(list => {
+        return sortByDate(list.filter(e => {
+            return moment(e.meta.date).isSame(date,'day')
+        }))
+    })
+}
+
+function sortByDate(list) {
+    return list.sort((a, b) => {
+        return new Date(b.meta.date) - new Date(a.meta.date)
+    })
 }
 
 // for debug 
-window.Q = Q; 
+window.Q = Q;
 
-export default Q; 
+export default Q;

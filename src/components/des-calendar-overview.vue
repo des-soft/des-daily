@@ -1,7 +1,7 @@
 <template>
     <div class="des-calendar-panel-overview">
       <div v-for="n in 12" class="des-calendar-panel-table-wrapper" :key="n" :data-month="n" @click="onClick(n)">
-        <des-calendar :year="year" :month="n"></des-calendar>
+        <des-calendar :year="year" :month="n" :countMap="countMap[n] || {}"></des-calendar>
       </div>
     </div>
 </template>
@@ -14,7 +14,8 @@ export default {
     DesCalendar
   },
   props:{
-    year:Number
+    year:Number,
+    countMap:Object
   },
   data() {
     return {
@@ -44,6 +45,7 @@ export default {
 }
 .des-calendar-panel-table-wrapper:hover{
   color:white;
+  cursor: pointer;
 }
 .des-calendar-panel-table-wrapper:before{
   content: attr(data-month);

@@ -149,7 +149,7 @@ export default {
     },
     created(){
         $bridge.req('Store/getConfig').then(res => {
-            this.config.git_url = res.git_url; 
+            this.config.git_url = res.git_url || ''; 
             this.config.qiniu = res.qiniu || {}; 
         })
     }, 

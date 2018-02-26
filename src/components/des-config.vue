@@ -147,6 +147,12 @@ export default {
             return e; 
         }
     },
+    created(){
+        $bridge.req('Store/getConfig').then(res => {
+            this.config.git_url = res.git_url; 
+            this.config.qiniu = res.qiniu || {}; 
+        })
+    }, 
     methods: {
         useConfig(){
             if (this.onloading) return; 

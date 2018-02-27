@@ -60,7 +60,7 @@ function pullRepo(){
 gitter.cmds_promise = []; 
 gitter.promisify = function(cmd){
     gitter.cmds_promise.push(cmd); 
-    
+
     return (...args) => {
         return new Promise((res, rej) => {
             args.push((err, git_res) => {
@@ -108,7 +108,7 @@ gitter.init = function(){
     }).catch(err => {
         return `all done but with some problem: ${err}`; 
     }).then(ok => {
-        console.log('[ init end ]', ok); 
+        console.log('[ GItter Init Finish ]', ok); 
         gitter.emit('init'); 
         return ok; 
     })

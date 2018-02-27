@@ -81,7 +81,7 @@ Q.run = fn => {
 
 ////////////    以下是 预定义的 Base Filter (即 Q.calculus 预设)    ////////////
 
-// @total: x => x
+// @total 获取日记总篇数 
 Q.define('total', $ => $.length); 
 
 // @sortByDate 按时间排序 

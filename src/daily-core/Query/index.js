@@ -20,7 +20,23 @@ Q.define = (name, filter) => {
 }
 
 /**
- * @description fns pipe，惰性。 
+ * @description 将 String 形的 Function 转换并 bind 参数上去 
+ * @param   { Function | String } fn 
+ * @returns { Function } function
+ */
+Q.calcFn = fn => {
+    if (typeof fn === 'string'){
+        let [fn_name, ...args] = fn.split('/'); 
+        let target_fn = Q.calculus[fn_name]; 
+        
+        return target_fn.bind(Q.calculus, ...args); 
+    } else {
+        return fn.bind(Q.calculus); 
+    }
+}
+
+/**
+ * @description 惰性的 Q.run 
  * @param { Function } fn 
  * @param { Array<Function> } fns 
  */
@@ -30,7 +46,7 @@ Q.of = (fn, fns = []) => {
 
     return {
         of:   fn => Q.of(fns), 
-        exec: () => Q.pipe(fns)
+        exec: () => Q.run(Q.pipe(...fns))
     }
 }
 
@@ -40,16 +56,7 @@ Q.of = (fn, fns = []) => {
  * @returns { Function } 返回组合好的函数 
  */
 Q.pipe = (...fns) => {
-    fns = fns.map(fn => {
-        if (typeof fn === 'string'){
-            let [fn_name, ...args] = fn.split('/'); 
-            let target_fn = Q.calculus[fn_name]; 
-            
-            return target_fn.bind(Q.calculus, ...args); 
-        } else {
-            return fn; 
-        }
-    }); 
+    fns = fns.map(Q.calcFn); 
 
     return list => {
         return fns.reduce(
@@ -65,19 +72,14 @@ Q.pipe = (...fns) => {
  * @returns { Promise<Array>    }    结果
  */
 Q.run = fn => {
-    if (typeof fn === 'string'){
-        let [fn_name, ...args] = fn.split('/'); 
-        let target_fn = Q.calculus[fn_name]; 
-        
-        fn = target_fn.bind(Q.calculus, ...args); 
-    }
+    fn = Q.calcFn(fn); 
 
     return $bridge.req('DPool/collector').then(fn); 
 }
 
 
 
-///////////////////// 以下是 预定义的 Base Filter (即 Q.calculus 预设)
+////////////    以下是 预定义的 Base Filter (即 Q.calculus 预设)    ////////////
 
 // @sortByDate 按时间排序 
 Q.define('sortByDate', list => {

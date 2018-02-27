@@ -81,6 +81,9 @@ Q.run = fn => {
 
 ////////////    以下是 预定义的 Base Filter (即 Q.calculus 预设)    ////////////
 
+// @total: x => x
+Q.define('total', $ => $.length); 
+
 // @sortByDate 按时间排序 
 Q.define('sortByDate', list => {
     return list.sort((a, b) => {
@@ -98,8 +101,6 @@ Q.define('pagination', (page, list) => {
 // ↑↑↑↑↑↑ ↓↓↓↓↓↓
 // Q.pipe('pagination/2'); 
 // 这样调用就可以把 2 赋给 page
-
-
 
 Q.define('date', list => {
     return sortByDate(list.filter(e => {

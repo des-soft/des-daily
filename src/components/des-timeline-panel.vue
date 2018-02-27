@@ -51,13 +51,14 @@ export default {
     };
   },
   created() {
-    Q.pagination(1).then(list => {
+    Q.run('pagination/1').then(list => {
       this.data = list.map(obj=>{
         obj.meta.time = moment(obj.meta.time);
         return obj;
       });
     });
-    Q.total().then(total => (this.pagination.total = total));
+
+    Q.run('total').then(total => (this.pagination.total = total));
   },
   computed: {
     totalPage() {

@@ -32,7 +32,9 @@ class Bridge {
         // }); 
         
 
-        let pathCreate = (path, todo, ...args) => {
+        let pathCreate = (path, todo) => {
+            console.log('[ Bridge Channel Reg ]', path); 
+
             ipcMain.on(path, (event, ipc_id, ...from_client_args) => {
                 console.log(`[ Bridge ] ${path}, ipc_id:`, ipc_id); 
 
@@ -66,6 +68,19 @@ class Bridge {
             'Store/getConfig', 
             () => Promise.resolve(Store.configer.data)
         ); 
+
+
+        // pathCreate(
+        //     'Gitter/commit', 
+        //     msg => Store.gitter.commit(msg)
+        // ); 
+
+        Store.gitter.cmds_promise.forEach(cmdKey => {
+            pathCreate(
+                `Gitter/${cmdKey}`, 
+                (...args) => Store.gitter[cmdKey](...args)
+            ); 
+        }); 
     }
 }
 

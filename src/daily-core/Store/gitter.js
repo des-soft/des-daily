@@ -57,7 +57,10 @@ function pullRepo(){
     }); 
 }
 
+gitter.cmds_promise = []; 
 gitter.promisify = function(cmd){
+    gitter.cmds_promise.push(cmd); 
+    
     return (...args) => {
         return new Promise((res, rej) => {
             args.push((err, git_res) => {
@@ -70,19 +73,15 @@ gitter.promisify = function(cmd){
     }
 }
 
+gitter.pullRepo = pullRepo; 
+
+gitter.pull = gitter.promisify('pull'); 
 gitter.add = gitter.promisify('add'); 
 gitter.commit = gitter.promisify('commit'); 
 gitter.push = gitter.promisify('push'); 
+gitter.status = gitter.promisify('status'); 
 gitter.checkIsRepo = gitter.promisify('checkIsRepo'); 
-gitter.pullRepo = pullRepo; 
 
-gitter.add_commit_push = function(msg){
-    return gitter.add('./*').then(ok => {
-        return gitter.commit(msg); 
-    }).then(commit_ok => {
-        return gitter.push(['origin', 'master']); 
-    }); 
-}
 
 gitter.init = function(){
     let { git_url } = configer.data; 

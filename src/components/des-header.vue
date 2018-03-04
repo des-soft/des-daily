@@ -3,7 +3,7 @@
         @mousedown="down"
         @mouseup="up"
         @mouseleave="leave">
-        Des Daily
+        {{ desTitleText }}
 
         <div class="to-right">
             <font-awesome-icon @click="setting"
@@ -37,7 +37,9 @@ export default {
                 screenY: 0
             },
             win_pos: [0, 0], 
-            setting_opened: false
+            setting_opened: false,
+
+            title_stack: []
         }
     },
     created(){
@@ -48,7 +50,24 @@ export default {
         // setTimeout(() => {
         //     this.setting(); 
         // }, 300); 
+
+        this.$d_bus.$on('des-header/push', title => {
+            this.title_stack.push(title); 
+        }); 
+
+        this.$d_bus.$on('des-header/pop', title => {
+            this.title_stack.pop(); 
+        }); 
+
+        this.$d_bus.$on('des-header/pop-all', title => {
+            this.title_stack = []; 
+        }); 
     }, 
+    computed: {
+        desTitleText(){
+            return this.title_stack[this.title_stack.length - 1] || 'Des Daily'; 
+        }
+    },
     methods: {
         move(e){
             if (!this.isDown) return; 

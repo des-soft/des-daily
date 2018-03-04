@@ -10,7 +10,7 @@
                     @click="toSave"/>
             </div>
         </div>
-        
+
         <div class="on-editor-wait" :class="{
             hidden: file_path
         }">
@@ -246,6 +246,7 @@ export default {
         transition: all .3s
 
         &.hidden 
+            height: 0
             opacity: 0 
 
         .wait-middle

@@ -12,6 +12,8 @@
 
 import cledit from '../../cledit'
 import Prism from 'prismjs'; 
+import saveFile from './saveFile'; 
+
 require('./mdGrammar'); 
 
 export default {
@@ -25,13 +27,20 @@ export default {
     data(){
         return {
             text: '', 
-            file_name: '',
+            file_path: '',
             changed: false
         }
     },
     created(){
         window.desEditor = this; 
         this.text = this.content; 
+
+        this.$d_bus.$on('init-edit', daily => {
+            let { conent, meta, file_path, text } = daily; 
+            console.log(daily); 
+
+            this.init(file_path, text); 
+        })
     },
     mounted(){
         // 
@@ -82,7 +91,12 @@ export default {
             if (e.ctrlKey && e.code === 'KeyS'){
                 // ctrl + s 
                 console.log(this.text); 
-                this.$emit('save', this.text); 
+                this.$emit('save-edit', {
+                    text: this.text, 
+                    file_path: this.file_path
+                }); 
+
+                saveFile(this.file_path, this.text); 
 
                 this.changed = false; 
             } else {
@@ -90,10 +104,10 @@ export default {
             }
         }, 
 
-        init(file_name, init_text){
-            this.file_name = _file_name; 
-            this.text = init_text; 
-            this.$refs.cledit.innerText = init_text; 
+        init(file_path, text){
+            this.file_path = file_path; 
+            this.text = text; 
+            this.$refs.cledit.innerText = text; 
         }
     }
 }

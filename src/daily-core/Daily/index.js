@@ -31,6 +31,7 @@ class Daily {
             return Promise.resolve(this); 
         } else {
             return this.read().then(data => { 
+                data.file_path = this.file_path; 
                 this.data = data; 
                 return this; 
             }); 

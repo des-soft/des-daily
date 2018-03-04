@@ -28,7 +28,8 @@ function parse(text, sp = ';;;;;;'){
 
         return {
             meta: beauty(meta), 
-            content: content
+            content: content,
+            text: text
         }
     }
 }

@@ -28,6 +28,10 @@ import faTh from '@fortawesome/fontawesome-free-solid/faTh'
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
 import faEdit from '@fortawesome/fontawesome-free-solid/faEdit'
+import faDownload from '@fortawesome/fontawesome-free-solid/faDownload'
+import faLanguage from '@fortawesome/fontawesome-free-solid/faLanguage'
+import faKeyboard from '@fortawesome/fontawesome-free-solid/faKeyboard'
+
 fontawesome.library.add(faTimes); 
 fontawesome.library.add(faCheck); 
 fontawesome.library.add(faCog); 
@@ -36,6 +40,9 @@ fontawesome.library.add(faTh);
 fontawesome.library.add(faAngleLeft); 
 fontawesome.library.add(faAngleRight); 
 fontawesome.library.add(faEdit); 
+fontawesome.library.add(faDownload); 
+fontawesome.library.add(faLanguage); 
+fontawesome.library.add(faKeyboard); 
 
 
 let D = {}

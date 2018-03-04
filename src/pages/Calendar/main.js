@@ -23,7 +23,7 @@ D.$attach('#app', [
             style: {
                 'vertical-align': 'top', 
                 'width': '490px',
-                'height': '764px',
+                'height': '564px',
                 'minWidth':'450px'
                 // resize: 'horizontal',
                 // overflow: 'auto'
@@ -32,7 +32,7 @@ D.$attach('#app', [
         {
             component: 'd-resizer',
             style: {
-                height: '764px',
+                height: '564px',
                 width: '5px'
             }
         },
@@ -41,8 +41,8 @@ D.$attach('#app', [
             component: DesEditor, 
             style: {
                 'vertical-align': 'top', 
-                width: '600px', 
-                height: '764px',
+                width: '500px', 
+                height: '564px',
                 'minWidth':'300px'
             }
         }

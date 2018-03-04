@@ -1,10 +1,25 @@
 <template>
-    <div class="des-editor" @keypress="press">
-        <div class="scroller">
-            <pre spellcheck="false" class="editor__inner content" ref="cledit">{{ content }}</pre>
-        </div>
+    <div class="des-editor" @keydown="file_path && press($event)">
+        <div class="on-editor-edit">
+            <div class="scroller">
+                <pre spellcheck="false" class="editor__inner content" ref="cledit">{{ content }}</pre>
+            </div>
 
-        <div class="tool-bar"></div>
+            <div v-if="file_path" class="tool-bar">
+                <font-awesome-icon :icon="['fa', 'download']"
+                    @click="toSave"/>
+            </div>
+        </div>
+        
+        <div class="on-editor-wait" :class="{
+            hidden: file_path
+        }">
+            <div class="wait-middle">
+                <font-awesome-icon :icon="['fa', 'keyboard']" />
+                <font-awesome-icon :icon="['fa', 'language']" />
+                <p class="intro">Des Editor</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -21,7 +36,7 @@ export default {
     props: {
         content: {
             type: String, 
-            default: '# hello, des-editor\n\n嗯....\n'
+            default: ''
         }
     },
     data(){
@@ -31,13 +46,37 @@ export default {
             changed: false
         }
     },
+    watch: {
+        file_path(new_val){
+            this.$d_bus.$emit('des-header/push', this.file_path); 
+        },
+        changed(){
+            console.log('changed', this.changed); 
+            this.$d_bus.$emit('des-header/pop'); 
+
+            if (this.changed){
+                this.$d_bus.$emit(
+                    'des-header/push',
+                    '* ' + this.file_path
+                ); 
+            } else {
+                this.$d_bus.$emit(
+                    'des-header/push',
+                    this.file_path
+                ); 
+            }
+        }
+    },
+
     created(){
         window.desEditor = this; 
         this.text = this.content; 
 
         this.$d_bus.$on('init-edit', daily => {
             let { conent, meta, file_path, text } = daily; 
-            console.log(daily); 
+            if (this.file_path === file_path) return; 
+
+            this.$d_bus.$emit('des-header/pop'); 
 
             this.init(file_path, text); 
         })
@@ -90,15 +129,7 @@ export default {
             console.log(e); 
             if (e.ctrlKey && e.code === 'KeyS'){
                 // ctrl + s 
-                console.log(this.text); 
-                this.$emit('save-edit', {
-                    text: this.text, 
-                    file_path: this.file_path
-                }); 
-
-                saveFile(this.file_path, this.text); 
-
-                this.changed = false; 
+                this.toSave(this.file_path, this.text); 
             } else {
                 this.changed = true; 
             }
@@ -108,6 +139,23 @@ export default {
             this.file_path = file_path; 
             this.text = text; 
             this.$refs.cledit.innerText = text; 
+        },
+
+        reset(){
+            this.text = ''; 
+            this.$refs.cledit.innerText = ''; 
+            this.file_path = null; 
+        },
+
+        toSave(){
+            this.$emit('save-edit', {
+                text: this.text, 
+                file_path: this.file_path
+            }); 
+
+            saveFile(this.file_path, this.text); 
+
+            this.changed = false; 
         }
     }
 }
@@ -119,16 +167,35 @@ export default {
 
 .des-editor 
     display: block
+    position: relative
     box-sizing: border-box
-    padding: 12px 16px
+    padding: 12px 16px 0 16px
     width: 100%
     height: 100%
     line-height: 1.5
 
+    .on-editor-edit
+        height: 100%
+        overflow: scroll
+
+    .tool-bar 
+        border-top: 1px solid #DDD
+        color: rgb(161, 149, 168)
+        padding: 0 16px
+        line-height: 32px
+        position: absolute
+        width: 100%
+        bottom: 0
+        left: 0
+
+        > * 
+            cursor: pointer
+    
 
     .scroller 
         width: 100% 
         height: 100%
+        overflow: scroll
 
 
     .content 
@@ -158,9 +225,6 @@ export default {
                 content: "Meta Info"
                 opacity: .5
 
-
-
-
     pre:focus 
         outline: none
 
@@ -168,11 +232,34 @@ export default {
         font-family: consolas, menlo, Courier, monospace
         font-size: 1em
     
-
     .pre 
         color: #555
         font-family: consolas, menlo, Courier, monospace
         font-size: 1em
         word-break: break-all
+
+
+    .on-editor-wait 
+        background-color: #FFF
+        height: 100%
+        width: 100%
+        transition: all .3s
+
+        &.hidden 
+            opacity: 0 
+
+        .wait-middle
+            position: absolute
+            color: rgb(161, 149, 168)
+            width: 100%
+            font-size: 64px
+            text-align: center
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -55%)
+
+            .intro 
+                font-size: 50%
+            
     
 </style>

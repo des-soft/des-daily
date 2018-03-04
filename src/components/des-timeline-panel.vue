@@ -93,7 +93,7 @@ export default {
       }
     },
     chooseDaily(daily){
-
+      this.$d_bus.$emit('init-edit', daily); 
     }
   }
 };

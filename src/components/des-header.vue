@@ -75,12 +75,14 @@ export default {
             let { screenX, screenY } = this.first; 
 
             let [x, y] = this.win_pos; 
-            
+
+            let x_pos = x + (e.screenX - screenX); 
+            let y_pos = y + (e.screenY - screenY); 
+
+            if (y_pos <= 0) y_pos = 0; 
+
             // 设置窗口位置
-            win.setPosition(
-                x + (e.screenX - screenX),
-                y + (e.screenY - screenY)
-            ); 
+            win.setPosition(x_pos, y_pos); 
         }, 
         down(e){
             this.isDown = true;

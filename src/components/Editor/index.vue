@@ -162,9 +162,6 @@ export default {
 </script>
 
 <style lang="sass">
-
-
-
 .des-editor 
     display: block
     position: relative
@@ -191,12 +188,10 @@ export default {
         > * 
             cursor: pointer
     
-
     .scroller 
         width: 100% 
         height: 100%
         overflow: scroll
-
 
     .content 
         width: 100%
@@ -238,7 +233,6 @@ export default {
         font-size: 1em
         word-break: break-all
 
-
     .on-editor-wait 
         background-color: #FFF
         height: 100%
@@ -249,6 +243,11 @@ export default {
             height: 0
             opacity: 0 
 
+        &.hidden .wait-middle
+            left: 0%
+            top: -100%
+            transform: translate(0%, 0%)
+
         .wait-middle
             position: absolute
             color: rgb(161, 149, 168)
@@ -258,9 +257,8 @@ export default {
             top: 50%
             left: 50%
             transform: translate(-50%, -55%)
+            transition: all .5s
 
             .intro 
                 font-size: 50%
-            
-    
 </style>

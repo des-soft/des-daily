@@ -17,8 +17,9 @@
                 }"
 
                 v-bind="modal.props"
+                v-on="modal.on"
 
-                @close="onModalClose(idx)"
+                @close="onModalClose(idx, $event)"
                 
                 class="modal"
             ></component>
@@ -113,14 +114,14 @@ export default {
         down(e){
             this.isDown = true; 
         },
-        onModalClose(idx){
+        onModalClose(idx, $event){
             let modal = this.modals[idx]; 
 
             modal.__hidden = true; 
 
             setTimeout(() => {
                 this.modals.splice(idx, 1); 
-                modal.__onClose('嗯。。。 成功退出');
+                modal.__onClose($event || '嗯。。。 成功退出');
             }, 420); 
         }
     }

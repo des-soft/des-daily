@@ -1,13 +1,17 @@
 <template>
     <div class="des-editor" @keydown="file_path && press($event)">
-        <div class="on-editor-edit">
+        <div class="on-editor-edit" :class="{
+            hidden: file_path
+        }">
             <div class="scroller">
                 <pre spellcheck="false" class="editor__inner content" ref="cledit">{{ content }}</pre>
             </div>
 
             <div v-if="file_path" class="tool-bar">
                 <font-awesome-icon :icon="['fa', 'download']"
-                    @click="toSave"/>
+                    @click="toSave" />
+                <font-awesome-icon :icon="['fa', 'times']"
+                    @click="reset" />
             </div>
         </div>
 
@@ -166,7 +170,8 @@ export default {
     display: block
     position: relative
     box-sizing: border-box
-    padding: 12px 16px 0 16px
+    overflow: hidden
+    padding: 10px 16px 0 16px
     width: 100%
     height: 100%
     line-height: 1.5
@@ -174,6 +179,13 @@ export default {
     .on-editor-edit
         height: 100%
         overflow: scroll
+        transition: all .3s
+        opacity: 0 
+        transform: scale(1.4)
+
+        &.hidden 
+            opacity: 1
+            transform: scale(1)
 
     .tool-bar 
         border-top: 1px solid #DDD
@@ -210,6 +222,7 @@ export default {
             position: relative
 
             &::after 
+                z-index: -111
                 position: absolute
                 color: #FFF
                 background-color: rgb(151, 139, 158)
@@ -237,7 +250,7 @@ export default {
         background-color: #FFF
         height: 100%
         width: 100%
-        transition: all .3s
+        transition: all .5s
 
         &.hidden 
             height: 0

@@ -95,6 +95,8 @@ $des-config-bg:     rgb(240, 239, 240)
             <input type="text" v-for="(line, i) in lines[lineKey]" :key="i"
                 :placeholder="line.placeholder"
                 ref="inputs"
+                v-once 
+                :value="line.default || ''"
                 :path="line.path" />
         </div>
 
@@ -191,9 +193,9 @@ export default {
                 return data; 
             }, {}); 
 
-            console.log(data); 
-
-            this.$emit('inputCommit', data); 
+            // console.log(data); 
+            
+            this.$emit('inputCommit', this, data); 
         }
     }
 }

@@ -59,6 +59,16 @@ export default {
     });
 
     Q.run('total').then(total => (this.pagination.total = total));
+
+
+    // DPool/add 会在新建文件的时候触发 
+    this.$bridge.bus.removeAllListeners('DPool/add'); 
+    this.$bridge.bus.on('DPool/add', (_, new_daily) => {
+      new_daily.meta.time = moment(new_daily.meta.time);
+
+      this.data.push(new_daily); 
+    }); 
+
   },
   computed: {
     totalPage() {

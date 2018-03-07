@@ -4,12 +4,13 @@
         <div :class="[{active:active === 'calendar'},'des-nav-item']" @click="click('calendar')">日历</div>
         <des-button @click="edit" class="edit">
             <font-awesome-icon :icon="['fa', 'edit']"
-                @click="createNewFile" />
+                @click="newFileClick" />
         </des-button>
     </div>
 </template>
 
 <script>
+import createNewFile from './create-new-file'
 import DesButton from './des-button'
 import DesPrompt from './des-prompt'
 
@@ -30,38 +31,10 @@ export default {
         edit(){
 
         },
-        createNewFile(){
-            this.$modal({
-                component: DesPrompt,
-                props: {
-                    lines: {
-                        '日记文件信息': [
-                            {
-                                type: 'text', 
-                                path: 'filename',
-                                placeholder: '日记名'
-                            },
-                            {
-                                type: 'text', 
-                                path: 'time',
-                                placeholder: '时间'
-                            },
-                            {
-                                type: 'text', 
-                                path: 'author',
-                                placeholder: '作者'
-                            }
-                        ]
-                    }
-                },
-                on: {
-                    inputCommit(data){
-                        console.log('!!', data); 
-                    }
-                }
-            }).then(close => {
-                console.log('ok', close); 
-            }); 
+        newFileClick(){
+            createNewFile().then(res => {
+                console.log('nav', res); 
+            })
         }
     }
 }

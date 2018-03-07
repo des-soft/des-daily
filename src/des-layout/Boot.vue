@@ -64,7 +64,7 @@ export default {
         }); 
 
         Vue.prototype.$modal = modal => {
-            console.log(modal); 
+            console.log(`[ Modal Created ]`, modal); 
             modal.__hidden = true; 
 
             this.modals.push(modal); 

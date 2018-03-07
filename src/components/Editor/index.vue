@@ -209,7 +209,7 @@ export default {
         width: 100%
         height: 100%
         tab-size: 4
-        font-size: 18px
+        font-size: 16px
         /* font-family: consolas, menlo, Courier, monospace, Helvetica, sans-serif; */
         font-family: consolas, menlo, "微软雅黑"
         white-space: pre-wrap
@@ -274,4 +274,43 @@ export default {
 
             .intro 
                 font-size: 50%
+
+// 编辑器文本样式 
+$text_color:        rgb(85, 85, 85)
+$gfm_bg_color:      rgb(45, 42, 46)
+
+.editor__inner 
+    color: $text_color
+    line-height: 1.5
+
+    .h1, .h2, .h3, .h4, .h5, .h6
+        font-weight: bold
+
+    .h1 
+        display: inline-block
+        font-size: 155%
+    .h2
+        font-size: 135%
+    .h3 
+        font-size: 125%
+    .h4 
+        font-size: 115%
+    .h5 
+        font-size: 105%
+    .h5 
+        font-size: 100%
+    
+
+    .blockquote 
+        font-style: italic
+
+    .gfm 
+        border-radius: 4px
+        font-size: 90%
+        font-family: Consolas, Menlo, "微软雅黑"
+        padding: 12px 16px
+        display: block
+        background-color: $gfm_bg_color
+        color: #FFF
+
 </style>

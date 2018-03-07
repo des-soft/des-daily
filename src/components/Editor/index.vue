@@ -181,11 +181,11 @@ export default {
         overflow: scroll
         transition: all .3s
         opacity: 0 
-        transform: scale(1.4)
+        // transform: scale(1.4)
 
         &.hidden 
             opacity: 1
-            transform: scale(1)
+            // transform: scale(1)
 
     .tool-bar 
         border-top: 1px solid #DDD

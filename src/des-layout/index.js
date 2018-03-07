@@ -66,6 +66,15 @@ D.install = function(Vue, option){
 }
 
 /**
+ * @description 设置 Vue 原型 
+ * @param { String } key 
+ * @param { * } val 
+ */
+D.setPrototype = function(key, val){
+    Vue.prototype[key] = val; 
+}
+
+/**
  * 
  * @param { Array<Object> } line_block_table 
  */

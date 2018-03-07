@@ -276,11 +276,17 @@ export default {
                 font-size: 50%
 
 // 编辑器文本样式 
-$text_color:        rgb(85, 85, 85)
-$gfm_bg_color:      rgb(45, 42, 46)
+$text-color:        rgb(85, 85, 85)
+$gfm-bg-color:      rgb(45, 42, 46)
+
+$text-color-link:           rgb( 85,  85, 145)
+$text-color-link-space:     rgb(155, 155, 155)
+
+$li-number:         rgb(150, 150, 160)
+$ul-prompt:         rgb(150, 150, 160)
 
 .editor__inner 
-    color: $text_color
+    color: $text-color
     line-height: 1.5
 
     .h1, .h2, .h3, .h4, .h5, .h6
@@ -300,9 +306,48 @@ $gfm_bg_color:      rgb(45, 42, 46)
     .h5 
         font-size: 100%
     
+    .link
+        color: $text-color-link-space
+        font-style: normal
+        .cl-underlined-text
+            color: $text-color-link
+            text-decoration: underline
+            font-style: italic
+    .url 
+        color: $text-color-link
+        text-decoration: underline
+        font-style: italic
+
+    .img 
+        color: $text-color-link-space
+        font-style: normal
+        .cl-src
+            color: $text-color-link
+            text-decoration: underline
+            font-style: italic               
 
     .blockquote 
         font-style: italic
+
+    .li 
+        .cl-li 
+            color: $li-number
+
+    .p 
+        .strong 
+            font-weight: bold
+        .em 
+            font-style: italic
+    
+    .hr
+        font-weight: bold
+        font-style: italic
+        font-size: 130%
+        padding: 0
+        margin: 0
+        display: inline-block
+        transform: scaleY(2)
+
 
     .gfm 
         border-radius: 4px
@@ -310,7 +355,7 @@ $gfm_bg_color:      rgb(45, 42, 46)
         font-family: Consolas, Menlo, "微软雅黑"
         padding: 12px 16px
         display: block
-        background-color: $gfm_bg_color
+        background-color: $gfm-bg-color
         color: #FFF
 
 </style>

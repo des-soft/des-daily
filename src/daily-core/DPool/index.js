@@ -70,6 +70,20 @@ gitter.on('init', () => {
 }); 
 
 /**
+ * @description 创建空白文件
+ * @param { Object } fileInfo
+ */
+DPool.createNewFile = function(fileInfo){
+    let { filename, content } = fileInfo; 
+
+    filename = path.parse(filename).name; 
+
+    let file_path = path.join(DAILY_BASE, filename + '.md'); 
+
+    return fs.writeFile(file_path, content || ''); 
+}
+
+/**
  * @returns { Promise<Array<Daily>> }
  */
 DPool.collector = () => gitter.ready.then(ok => {

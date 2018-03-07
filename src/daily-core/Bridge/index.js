@@ -12,9 +12,14 @@ class Bridge {
     }
 
     init(){
-        DPool.on('add', path => {
-            this.webContents.send('DPool/add', path); 
-        });; 
+        DPool.on('add', daily => {
+            
+            daily.getData().then(ok => {
+                console.log('[ Bridge Emit ] DPool/add', daily.data); 
+
+                this.webContents.send('DPool/add', daily.data); 
+            });
+        });
 
         DPool.on('unlink', daily => {
             this.webContents.send('DPool/add', daily); 
@@ -57,6 +62,11 @@ class Bridge {
             () => DPool.collector().then(
                 data => data.map(e => e.data)
             )
+        ); 
+
+        pathCreate(
+            'DPool/createNewFile', 
+            fileInfo => DPool.createNewFile(fileInfo)
         ); 
 
         pathCreate(

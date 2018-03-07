@@ -28,5 +28,7 @@ bridge.req = function(ns, ...args){
     }); 
 }
 
+bridge.bus = ipcRenderer; 
+
 export default bridge; 
 
